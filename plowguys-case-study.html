@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plowguys — Ji Yang</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #FAF7F2;
+    --bg-secondary: #F0ECE4;
+    --text-primary: #1A1A1A;
+    --text-secondary: #6B6B6B;
+    --text-tertiary: #9B9B9B;
+    --accent: #E8735A;
+    --accent-hover: #D4624B;
+    --border: #E5E0D8;
+    --surface: #FFFFFF;
+    --font-family: 'Space Grotesk', sans-serif;
+    --content-max-width: 780px;
+    --edge-padding: 40px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 64px;
+    --space-2xl: 96px;
+    --space-3xl: 128px;
+    --transition-fast: 0.2s ease;
+    --transition-base: 0.3s ease;
+    --transition-slow: 0.6s ease;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-family);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    letter-spacing: 0.01em;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+  }
+
+  .container {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 var(--edge-padding);
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250, 247, 242, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
+  }
+  nav a {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: color var(--transition-base);
+  }
+  nav a:hover { color: var(--accent); }
+  .nav-logo { font-weight: 700; font-size: 1rem; letter-spacing: -0.02em; }
+  .nav-back { display: flex; align-items: center; gap: 6px; }
+  .nav-back svg { width: 16px; height: 16px; }
+
+  .hero {
+    padding: var(--space-3xl) 0 var(--space-2xl);
+    margin-top: 56px;
+  }
+  .hero-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    margin-bottom: var(--space-md);
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 5vw, 3.75rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin-bottom: var(--space-lg);
+  }
+  .hero-subtitle {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    max-width: 600px;
+  }
+
+  .meta-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--space-lg);
+    padding: var(--space-lg) 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: var(--space-2xl);
+  }
+  .meta-item-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+    margin-bottom: var(--space-xs);
+  }
+  .meta-item-value {
+    font-size: 0.9375rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+
+  section { margin-bottom: var(--space-2xl); }
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    margin-bottom: var(--space-sm);
+  }
+  section h2 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-lg);
+  }
+  section h3 {
+    font-size: 1.375rem;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-md);
+  }
+  section p {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-md);
+  }
+  section p:last-child { margin-bottom: 0; }
+
+  .decisive-insight {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    padding: var(--space-xl) 0;
+    margin: var(--space-2xl) 0;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+  }
+  .decisive-insight .inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 var(--edge-padding);
+  }
+  .decisive-insight .section-label { color: var(--accent); }
+  .decisive-insight p { color: rgba(250, 247, 242, 0.72); }
+  .decisive-insight .highlight-text {
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    color: var(--bg-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .evidence-grid {
+    display: grid;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+  }
+  .evidence-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: var(--space-lg);
+    border-radius: 4px;
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  }
+  .evidence-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  }
+  .evidence-card .card-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    margin-bottom: var(--space-sm);
+  }
+  .evidence-card h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: var(--space-sm);
+  }
+  .evidence-card p { font-size: 0.9375rem; color: var(--text-secondary); }
+
+  .user-quote {
+    border-left: 2px solid var(--accent);
+    padding: var(--space-md) 0 var(--space-md) var(--space-lg);
+    margin: var(--space-lg) 0;
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+  .user-quote cite {
+    display: block;
+    font-style: normal;
+    font-size: 0.8125rem;
+    color: var(--text-tertiary);
+    margin-top: var(--space-sm);
+    font-weight: 500;
+  }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+    margin: var(--space-xl) 0;
+    text-align: center;
+  }
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: var(--space-xs);
+  }
+  .stat-number .a { color: var(--accent); }
+  .stat-desc {
+    font-size: 0.8125rem;
+    color: var(--text-tertiary);
+    line-height: 1.4;
+  }
+
+  .persona-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+  }
+  .persona-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: var(--space-lg);
+    border-radius: 4px;
+  }
+  .persona-card .ptag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    margin-bottom: var(--space-sm);
+  }
+  .persona-card h4 { font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-xs); }
+  .persona-card .pdemo { font-size: 0.875rem; color: var(--text-tertiary); margin-bottom: var(--space-md); }
+  .persona-card .pquote { font-size: 0.9375rem; font-style: italic; color: var(--text-secondary); margin-bottom: var(--space-md); line-height: 1.5; }
+  .persona-card .pneeds { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; }
+  .tag-group { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: var(--space-md); }
+  .tag {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--text-tertiary);
+  }
+
+  .heuristic-section { margin-top: var(--space-lg); }
+  .heuristic-item { padding: var(--space-lg) 0; border-bottom: 1px solid var(--border); }
+  .heuristic-item:last-child { border-bottom: none; }
+  .heuristic-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-sm);
+    color: var(--accent);
+  }
+  .heuristic-item h4 { font-size: 1.125rem; font-weight: 600; margin-bottom: var(--space-sm); }
+  .heuristic-item p { font-size: 0.9375rem; color: var(--text-secondary); }
+
+  .feature-table {
+    width: 100%;
+    margin-top: var(--space-lg);
+    border-collapse: collapse;
+  }
+  .feature-table th {
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .feature-table td {
+    padding: var(--space-md) var(--space-md) var(--space-md) 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .feature-table td:first-child { font-weight: 500; color: var(--text-primary); width: 28%; }
+
+  .tradeoff-block {
+    background: var(--bg-secondary);
+    padding: var(--space-lg);
+    border-radius: 4px;
+    margin: var(--space-xl) 0;
+  }
+  .tradeoff-block h4 { font-size: 1rem; font-weight: 600; margin-bottom: var(--space-md); }
+  .tradeoff-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
+  .tradeoff-col .tl {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+    margin-bottom: var(--space-sm);
+  }
+  .tradeoff-col p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.6; }
+
+  .outcome-block {
+    border: 2px solid var(--accent);
+    padding: var(--space-xl) var(--space-lg);
+    border-radius: 4px;
+    margin: var(--space-xl) 0;
+    text-align: center;
+  }
+  .outcome-block .section-label { margin-bottom: var(--space-md); }
+  .outcome-block h3 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: var(--space-md); }
+  .outcome-block p { color: var(--text-secondary); max-width: 560px; margin: 0 auto; }
+
+  .divider { height: 1px; background: var(--border); margin: var(--space-2xl) 0; }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+  }
+  .process-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: var(--space-lg);
+    border-radius: 4px;
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  }
+  .process-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  }
+  .process-card .card-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    margin-bottom: var(--space-sm);
+  }
+  .process-card h4 { font-size: 1.125rem; font-weight: 600; margin-bottom: var(--space-sm); }
+  .process-card p { font-size: 0.9375rem; color: var(--text-secondary); }
+
+  footer {
+    padding: var(--space-xl) 0;
+    border-top: 1px solid var(--border);
+    margin-top: var(--space-2xl);
+  }
+  footer .container { display: flex; justify-content: space-between; align-items: center; }
+  footer p { font-size: 0.8125rem; color: var(--text-tertiary); }
+  footer a { color: var(--accent); text-decoration: none; font-size: 0.875rem; font-weight: 500; }
+  footer a:hover { color: var(--accent-hover); }
+
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 640px) {
+    :root { --edge-padding: 24px; }
+    .hero h1 { font-size: 2rem; }
+    .stat-row { grid-template-columns: 1fr; gap: var(--space-lg); }
+    .persona-grid { grid-template-columns: 1fr; }
+    .tradeoff-row { grid-template-columns: 1fr; }
+    .meta-row { grid-template-columns: repeat(2, 1fr); }
+    .process-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="#" class="nav-back">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8L10 13"/></svg>
+      All Projects
+    </a>
+    <a href="#" class="nav-logo">Ji Yang</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-label fade-in">Case Study</div>
+    <h1 class="fade-in">Plowguys</h1>
+    <p class="hero-subtitle fade-in">Redesigning a crew member app for snow removal workers — where thick gloves, harsh weather, and split-second task management demanded an interface built for the field, not the office.</p>
+  </div>
+</header>
+
+<div class="container">
+  <div class="meta-row fade-in">
+    <div>
+      <div class="meta-item-label">Role</div>
+      <div class="meta-item-value">UX/UI Designer</div>
+    </div>
+    <div>
+      <div class="meta-item-label">Client</div>
+      <div class="meta-item-value">Plowguys</div>
+    </div>
+    <div>
+      <div class="meta-item-label">Scope</div>
+      <div class="meta-item-value">UX Audit, Research,<br>Redesign & Prototype</div>
+    </div>
+    <div>
+      <div class="meta-item-label">Methods</div>
+      <div class="meta-item-value">Heuristic Evaluation, User Feedback, Competitive Analysis, Wireframing</div>
+    </div>
+  </div>
+</div>
+
+<div class="decisive-insight">
+  <div class="inner">
+    <div class="section-label fade-in">Decisive Insight</div>
+    <p class="highlight-text fade-in">The app wasn't built for gloved hands in a snowstorm. Crew members needed <em>fewer decisions, larger targets, and voice-first interaction</em> — not more features.</p>
+    <p class="fade-in">Plowguys' existing crew app suffered from a classic mismatch: it was designed as a standard task management tool, but used by workers in extreme physical conditions. Crew members wearing thick insulated gloves struggled with small touch targets. Hidden menus buried critical trip information. Confusing iconography forced cognitive effort in moments that demanded speed. The problem wasn't missing functionality — it was <strong style="color: var(--bg-primary);">operational usability under constraint</strong>.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <section class="fade-in">
+    <div class="section-label">01 — Problem</div>
+    <h2>A task app that fights its own users</h2>
+    <p>Plowguys is a snow removal service where route managers assign cleanup routes to crew members during and after storms. The crew member app is the primary tool for receiving assignments, navigating properties, checking in/out of jobs, and tracking task completion.</p>
+    <p>The existing app had critical usability issues: mismatched iconography, buried navigation, and an interaction model that assumed clean, dry hands and full attention. In reality, crew members operated the app in freezing temperatures, wearing thick gloves, often while transitioning between properties. Every moment of confusion meant delayed service.</p>
+  </section>
+
+  <div class="stat-row fade-in">
+    <div>
+      <div class="stat-number">100<span class="a">%</span></div>
+      <div class="stat-desc">Of surveyed crew preferred<br>voice recognition over remote</div>
+    </div>
+    <div>
+      <div class="stat-number">3<span class="a">+</span></div>
+      <div class="stat-desc">Heuristic violations<br>identified in UX audit</div>
+    </div>
+    <div>
+      <div class="stat-number">5</div>
+      <div class="stat-desc">Navigation categories<br>reorganized from hamburger menu</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <section class="fade-in">
+    <div class="section-label">02 — Evidence</div>
+    <h2>Heuristic audit + field feedback</h2>
+    <p>The UX audit evaluated the existing app against Nielsen's usability heuristics. Simultaneously, direct feedback from crew members revealed the physical constraints that no heuristic checklist would capture on its own.</p>
+  </section>
+
+  <div class="heuristic-section fade-in">
+    <div class="heuristic-item">
+      <div class="heuristic-label">Heuristic 01 — Match Between System & Real World</div>
+      <h4>Play icon misread as audio control</h4>
+      <p>The primary action button used a play icon — universally associated with audio/video playback. Crew members (and the designer) initially misread it as a "listen" control rather than a route-start trigger. The metaphor didn't match the mental model of starting a snow removal task.</p>
+    </div>
+    <div class="heuristic-item">
+      <div class="heuristic-label">Heuristic 02 — Consistency & Standards</div>
+      <h4>Oversized arrow broke visual hierarchy</h4>
+      <p>A disproportionately large arrow button dominated the home screen, creating an unbalanced visual hierarchy. It drew attention away from the actual task information crew members needed to scan quickly upon opening the app.</p>
+    </div>
+    <div class="heuristic-item">
+      <div class="heuristic-label">Heuristic 03 — Recognition Rather Than Recall</div>
+      <h4>Trip summaries hidden in hamburger menu</h4>
+      <p>Critical upcoming trip information was buried inside a hamburger menu — requiring crew members to remember it existed and navigate to find it. This increased cognitive load precisely when users needed a quick, glanceable overview before heading out into the storm.</p>
+    </div>
+  </div>
+
+  <div class="user-quote fade-in">
+    "We wear thick gloves out there. Sometimes I can't even unlock my phone, let alone tap a tiny button to check into a property."
+    <cite>— Crew Member Feedback</cite>
+  </div>
+
+  <div class="user-quote fade-in">
+    "Before the busy season hits, I just want to open the app and see what's coming up. I don't want to dig through menus."
+    <cite>— Crew Member Feedback</cite>
+  </div>
+
+  <div class="evidence-grid fade-in">
+    <div class="evidence-card">
+      <div class="card-label">Field Finding 01</div>
+      <h4>Gloved interaction is the norm, not the exception</h4>
+      <p>Crew members wear thick insulated gloves throughout their shifts. Small touch targets, swipe gestures, and precision taps are functionally impossible. The interface needed to be operable with a gloved thumb — or not at all.</p>
+    </div>
+    <div class="evidence-card">
+      <div class="card-label">Field Finding 02</div>
+      <h4>Voice recognition: unanimous preference</h4>
+      <p>When surveyed on preferred interaction method — voice recognition vs. remote control — 100% of crew members chose voice. This wasn't a nice-to-have; it was the only viable hands-free option for their working conditions.</p>
+    </div>
+    <div class="evidence-card">
+      <div class="card-label">Field Finding 03</div>
+      <h4>Pre-shift overview is the #1 need</h4>
+      <p>As the busy season approached, crew members' top request was a fast, at-a-glance trip summary. They needed to know how many properties, which services, and total estimated time — without any navigation required.</p>
+    </div>
+    <div class="evidence-card">
+      <div class="card-label">Competitive Insight</div>
+      <h4>Map-heavy apps set the bar</h4>
+      <p>Analysis of overlapping apps — ride-hailing (Uber-style activity views), health tracking (Noom's task flow), and delivery services (Foodpanda's order status) — revealed best practices for sequential task management, real-time status indicators, and map-centered navigation that Plowguys was missing.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <section class="fade-in">
+    <div class="section-label">03 — User Context</div>
+    <h2>Two roles, one app</h2>
+    <p>The crew member app sits in a larger ecosystem. Route managers assign routes; crew members execute them. Understanding this relationship clarified that the app's primary job was to minimize the gap between assignment and action — getting crew members to the right property, doing the right task, as fast as possible.</p>
+  </section>
+
+  <div class="persona-grid fade-in">
+    <div class="persona-card">
+      <div class="ptag">Context A — In-Transit</div>
+      <h4>Between Properties</h4>
+      <div class="pdemo">Driving · Gloved · Time-pressured</div>
+      <div class="pquote">"Just tell me where to go next."</div>
+      <div class="pneeds">The crew member is moving between properties. They need the next address, navigation, and a one-tap check-in. Anything that requires reading, scrolling, or multi-step interaction is a blocker. Voice commands and large map displays are essential here.</div>
+      <div class="tag-group">
+        <span class="tag">Hands-occupied</span>
+        <span class="tag">Navigation-first</span>
+        <span class="tag">Voice input</span>
+        <span class="tag">Minimal taps</span>
+      </div>
+    </div>
+    <div class="persona-card">
+      <div class="ptag">Context B — On-Site</div>
+      <h4>At a Property</h4>
+      <div class="pdemo">Stationary · Task-focused · Documenting</div>
+      <div class="pquote">"What exactly do I need to do here?"</div>
+      <div class="pneeds">The crew member has arrived and needs to know which services this property requires — sidewalk, deicing, roof clearing, walkway. They need to check tasks off, report issues, take photos, and check out. Clarity and speed are paramount; ambient information (map, other properties) should recede.</div>
+      <div class="tag-group">
+        <span class="tag">Task checklist</span>
+        <span class="tag">Photo capture</span>
+        <span class="tag">Issue reporting</span>
+        <span class="tag">Quick checkout</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <section class="fade-in">
+    <div class="section-label">04 — Design Decision</div>
+    <h2>Restructure, surface, enlarge</h2>
+    <p>Three design moves, each traced directly to audit findings and field feedback. The redesign wasn't about adding features — it was about restructuring what already existed so it could be used under real-world constraints.</p>
+  </section>
+
+  <table class="feature-table fade-in">
+    <thead><tr><th>Change</th><th>Problem → Solution</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Bottom Navigation</td>
+        <td>Settings, trip info, and categories were buried in a hamburger menu → Reorganized into a persistent 5-tab bottom bar (Route, Calendar, Trips, Chat, Settings) for thumb-reachable, glove-friendly access.</td>
+      </tr>
+      <tr>
+        <td>Trip Summary Card</td>
+        <td>No pre-shift overview available at a glance → Prominent trip summary showing property count, total estimated time, and service types — visible immediately on the Trips tab without any navigation.</td>
+      </tr>
+      <tr>
+        <td>Map + Task Integration</td>
+        <td>Map and task list were disconnected → Unified view with interactive map on top and scrollable property/task list below, with numbered property markers matching the list sequence.</td>
+      </tr>
+      <tr>
+        <td>Enlarged Touch Targets</td>
+        <td>Small buttons and icons unusable with gloves → Increased all primary CTAs (Check In, Check Out, Pause) to meet minimum 48px tap targets, with generous spacing between interactive elements.</td>
+      </tr>
+      <tr>
+        <td>Voice Recognition</td>
+        <td>All interactions required touch input → Integrated voice command support for check-in, check-out, and status updates — enabling fully hands-free operation during transit and on-site work.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tradeoff-block fade-in">
+    <h4>Trade-offs Considered</h4>
+    <div class="tradeoff-row">
+      <div class="tradeoff-col">
+        <div class="tl">What we prioritized</div>
+        <p>Operational speed over information density. Bottom navigation over hamburger menu despite screen space cost. Voice-first interaction for core actions. Seasonal-adaptive UI themes (winter "On" mode) to match the work context. Glanceable trip summaries over detailed scheduling views.</p>
+      </div>
+      <div class="tradeoff-col">
+        <div class="tl">What we deprioritized</div>
+        <p>Complex route optimization features — valuable but out of scope for the crew member's needs (this is the route manager's domain). Real-time crew-to-crew communication beyond basic chat. Sign language accessibility and new route suggestion features were flagged for future iterations, not MVP.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <section class="fade-in">
+    <div class="section-label">05 — Process</div>
+    <h2>From audit to prototype in three phases</h2>
+  </section>
+
+  <div class="process-grid fade-in">
+    <div class="process-card">
+      <div class="card-label">Phase 01</div>
+      <h4>Reorganization</h4>
+      <p>Restructured the information architecture. Elevated hidden categories into persistent bottom navigation. Made trip summaries and route info immediately accessible on app launch.</p>
+    </div>
+    <div class="process-card">
+      <div class="card-label">Phase 02</div>
+      <h4>Wireframes</h4>
+      <p>Designed low-fidelity wireframes with seasonal context — the "On" season (winter) UI featured prominent task checklists, map-integrated route views, and enlarged interactive elements.</p>
+    </div>
+    <div class="process-card">
+      <div class="card-label">Phase 03</div>
+      <h4>Prototype</h4>
+      <p>Built an interactive prototype covering the full trip flow: route overview → navigate to property → check in → complete tasks → photo documentation → check out → next property. Tested against original heuristic violations.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="outcome-block fade-in">
+    <div class="section-label">Outcome</div>
+    <h3>Redesigned app shipped for crew testing</h3>
+    <p>The redesigned crew member app addressed all three heuristic violations from the audit, introduced voice-first interaction for gloved operation, and surfaced critical trip information that was previously buried. The prototype was delivered to Plowguys for crew field testing ahead of the next snow season.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <section class="fade-in">
+    <div class="section-label">06 — Next Iteration</div>
+    <h2>What comes next</h2>
+    <p>The redesign established the structural foundation. Future iterations will gather field user reviews and pain points from real storm-season use, focus on communication flows between crew members and route managers, and revisit earlier design explorations for features like new route suggestions and sign language accessibility.</p>
+    <p>The biggest open question remains validation: does the voice-first approach hold up when crew members are operating noisy snow plows? Field testing will answer this and inform whether voice commands need a fallback interaction layer beyond enlarged touch targets.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="fade-in">
+    <div class="section-label">07 — Reflection</div>
+    <h2>What I learned</h2>
+    <p>This project taught me that usability heuristics are necessary but not sufficient. The heuristic audit caught interface-level problems — wrong icons, hidden menus, visual imbalance. But the most impactful insight came from understanding the <em>physical context</em> of use: gloved hands, moving vehicles, harsh weather. No heuristic checklist surfaces that; you have to talk to the people doing the work.</p>
+    <p>Competitive analysis across adjacent domains (ride-hailing, health tracking, food delivery) proved more valuable than looking at direct competitors. Plowguys doesn't compete with other snow removal apps — it competes with every map-heavy, task-sequential mobile experience its crew members have ever used. That's the bar.</p>
+  </section>
+
+</div>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2026 Ji Yang</p>
+    <a href="#" id="btt">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 60);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+document.getElementById('btt').addEventListener('click', e => {
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+
+</body>
+</html>

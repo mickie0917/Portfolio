@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Makahealth — Ji Yang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #FAF7F2;
+    --bg-secondary: #F0ECE4;
+    --text-primary: #1A1A1A;
+    --text-secondary: #6B6B6B;
+    --text-tertiary: #9B9B9B;
+    --accent: #E8735A;
+    --accent-hover: #D4624B;
+    --border: #E5E0D8;
+    --surface: #FFFFFF;
+    --font-family: 'Space Grotesk', sans-serif;
+    --content-max-width: 780px;
+    --edge-padding: 40px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 64px;
+    --space-2xl: 96px;
+    --space-3xl: 128px;
+    --transition-fast: 0.2s ease;
+    --transition-base: 0.3s ease;
+    --transition-slow: 0.6s ease;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-family);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.25;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 180px;
+  }
+
+  .page { max-width: var(--content-max-width); margin: 0 auto; padding: 0 var(--edge-padding); position: relative; z-index: 1; }
+
+  /* ---- Nav ---- */
+  nav { padding: var(--space-lg) 0; display: flex; justify-content: space-between; align-items: center; }
+  .nav-name { font-weight: 600; font-size: 1rem; letter-spacing: -0.01em; color: var(--text-primary); text-decoration: none; }
+  .nav-links { display: flex; gap: var(--space-lg); list-style: none; }
+  .nav-links a {
+    font-size: 0.875rem; font-weight: 400; color: var(--text-secondary); text-decoration: none;
+    position: relative; transition: color var(--transition-base);
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px;
+    background: var(--accent); transition: width 0.4s ease;
+  }
+  .nav-links a:hover { color: var(--text-primary); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* ---- Back link ---- */
+  .back-link {
+    display: inline-flex; align-items: center; gap: 6px; margin-top: var(--space-xl);
+    font-size: 0.8125rem; font-weight: 500; color: var(--text-tertiary); text-decoration: none;
+    letter-spacing: 0.03em; text-transform: uppercase; transition: color var(--transition-base), gap 0.3s ease;
+  }
+  .back-link:hover { color: var(--accent); gap: 10px; }
+
+  /* ---- Hero ---- */
+  .hero { padding: var(--space-xl) 0 var(--space-2xl); }
+  .hero-label {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: var(--space-md);
+  }
+  .hero h1 {
+    font-size: 3.5rem; font-weight: 700; line-height: 1.05; letter-spacing: -0.03em;
+    margin-bottom: var(--space-lg);
+  }
+
+  /* Decisive insight — the single most important sentence */
+  .decisive-insight {
+    font-size: 1.5rem; font-weight: 300; line-height: 1.45; color: var(--text-secondary);
+    border-left: 2px solid var(--accent); padding-left: var(--space-lg);
+    margin-bottom: var(--space-xl); max-width: 640px;
+  }
+
+  /* Constraint badges */
+  .constraints { display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-bottom: var(--space-xl); }
+  .constraint {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.03em; padding: 6px 14px;
+    border: 1px solid var(--border); color: var(--text-secondary);
+    transition: all var(--transition-base);
+  }
+  .constraint:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Project meta row */
+  .meta-row { display: flex; gap: var(--space-xl); flex-wrap: wrap; padding-bottom: var(--space-xl); border-bottom: 1px solid var(--border); }
+  .meta-item { display: flex; flex-direction: column; gap: var(--space-xs); }
+  .meta-label { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-tertiary); }
+  .meta-value { font-size: 0.9375rem; font-weight: 400; color: var(--text-primary); }
+
+  /* ---- Sections ---- */
+  .section { padding: var(--space-2xl) 0; }
+  .section + .section { border-top: 1px solid var(--border); }
+
+  .section-label {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--text-tertiary); margin-bottom: var(--space-md);
+  }
+  .section h2 {
+    font-size: 1.75rem; font-weight: 600; line-height: 1.25; letter-spacing: -0.01em;
+    margin-bottom: var(--space-lg);
+  }
+  .section p {
+    color: var(--text-secondary); margin-bottom: var(--space-md); max-width: 640px;
+  }
+  .section p:last-child { margin-bottom: 0; }
+
+  /* ---- Evidence grid ---- */
+  .evidence-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg);
+    margin-top: var(--space-lg);
+  }
+  .evidence-card {
+    padding: var(--space-lg); background: var(--surface); border: 1px solid var(--border);
+    transition: border-color 0.3s ease;
+  }
+  .evidence-card:hover { border-color: var(--accent); }
+  .evidence-card .ev-type {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: var(--space-sm);
+  }
+  .evidence-card .ev-title {
+    font-size: 1rem; font-weight: 600; margin-bottom: var(--space-sm); color: var(--text-primary);
+  }
+  .evidence-card .ev-detail {
+    font-size: 0.875rem; color: var(--text-secondary); line-height: 1.55;
+  }
+
+  /* ---- Tradeoff block ---- */
+  .tradeoff-block {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: var(--space-xl) 0;
+    border: 1px solid var(--border);
+  }
+  .tradeoff-side { padding: var(--space-lg); }
+  .tradeoff-side.gained { background: var(--surface); border-right: 1px solid var(--border); }
+  .tradeoff-side.sacrificed { background: var(--bg-secondary); }
+  .tradeoff-label {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase;
+    margin-bottom: var(--space-md);
+  }
+  .tradeoff-side.gained .tradeoff-label { color: var(--accent); }
+  .tradeoff-side.sacrificed .tradeoff-label { color: var(--text-tertiary); }
+  .tradeoff-item {
+    font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.6;
+    padding: var(--space-sm) 0; border-bottom: 1px solid var(--border);
+  }
+  .tradeoff-item:last-child { border-bottom: none; }
+
+  /* ---- Image placeholders ---- */
+  .img-full {
+    width: 100%; aspect-ratio: 16 / 9; background: var(--bg-secondary); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-tertiary); font-size: 0.875rem; margin: var(--space-lg) 0;
+    transition: border-color 0.4s ease;
+  }
+  .img-full:hover { border-color: var(--accent); }
+  .img-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md);
+    margin: var(--space-lg) 0;
+  }
+  .img-row .img-cell {
+    aspect-ratio: 4 / 3; background: var(--bg-secondary); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-tertiary); font-size: 0.8125rem;
+    transition: border-color 0.4s ease;
+  }
+  .img-row .img-cell:hover { border-color: var(--accent); }
+
+  /* Three-up image row for final designs */
+  .img-triple {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-md);
+    margin: var(--space-lg) 0;
+  }
+  .img-triple .img-cell {
+    aspect-ratio: 9 / 16; background: var(--bg-secondary); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-tertiary); font-size: 0.75rem;
+    transition: border-color 0.4s ease;
+  }
+  .img-triple .img-cell:hover { border-color: var(--accent); }
+
+  /* ---- Outcome highlight ---- */
+  .outcome-row {
+    display: flex; gap: var(--space-xl); margin: var(--space-lg) 0; flex-wrap: wrap;
+  }
+  .outcome-stat { flex: 1; min-width: 140px; }
+  .outcome-number {
+    font-size: 2.5rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1;
+    color: var(--accent); margin-bottom: var(--space-xs);
+  }
+  .outcome-desc { font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.4; }
+
+  /* ---- Next project link ---- */
+  .next-project {
+    padding: var(--space-2xl) 0; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .next-label { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-tertiary); }
+  .next-title {
+    font-size: 1.75rem; font-weight: 600; letter-spacing: -0.01em; color: var(--text-primary);
+    text-decoration: none; transition: color var(--transition-base);
+  }
+  .next-title:hover { color: var(--accent); }
+  .next-arrow { font-size: 1.5rem; color: var(--text-tertiary); transition: transform 0.3s ease, color 0.3s ease; }
+  .next-project:hover .next-arrow { transform: translateX(4px); color: var(--accent); }
+
+  /* ---- Status bar ---- */
+  .status-bar {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
+    padding: 12px var(--edge-padding);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--text-tertiary); background: var(--bg-primary); border-top: 1px solid var(--border);
+  }
+  .status-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+    display: inline-block; margin-right: 8px; animation: pulse 3s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .status-bar a { color: var(--text-tertiary); text-decoration: none; transition: color var(--transition-base); }
+  .status-bar a:hover { color: var(--accent); }
+
+  .footer-spacer { height: 100px; }
+
+  /* ---- Scroll reveal ---- */
+  .reveal { opacity: 0; transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.up { transform: translateY(30px); }
+  .reveal.left { transform: translateX(-30px); }
+  .reveal.right { transform: translateX(30px); }
+  .reveal.visible { opacity: 1; transform: translate(0, 0); }
+  .stagger > .reveal:nth-child(1) { transition-delay: 0ms; }
+  .stagger > .reveal:nth-child(2) { transition-delay: 80ms; }
+  .stagger > .reveal:nth-child(3) { transition-delay: 160ms; }
+  .stagger > .reveal:nth-child(4) { transition-delay: 240ms; }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 640px) {
+    :root { --edge-padding: 24px; }
+    .hero h1 { font-size: 2.5rem; }
+    .decisive-insight { font-size: 1.25rem; }
+    .evidence-grid { grid-template-columns: 1fr; }
+    .tradeoff-block { grid-template-columns: 1fr; }
+    .tradeoff-side.gained { border-right: none; border-bottom: 1px solid var(--border); }
+    .img-row { grid-template-columns: 1fr; }
+    .img-triple { grid-template-columns: 1fr 1fr; }
+    .meta-row { gap: var(--space-lg); }
+    .outcome-number { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <nav>
+    <a href="#" class="nav-name">Ji Yang</a>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Works</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+  </nav>
+
+  <a href="#" class="back-link reveal up">← Back to Works</a>
+
+  <!-- ================================================ -->
+  <!-- HERO: Lead with the decisive insight, not process -->
+  <!-- ================================================ -->
+  <header class="hero">
+    <div class="hero-label reveal up">03 — Ship in Constraints</div>
+    <h1 class="reveal up">Makahealth Patient Portal</h1>
+
+    <!-- THE DECISIVE INSIGHT — the single most important sentence on this page -->
+    <div class="decisive-insight reveal up">
+      <!-- PLACEHOLDER: Replace with your actual decisive insight. What was the one key
+           decision or finding that defined this project? Example below — rewrite in your voice. -->
+      Patients didn't need more health data — they needed a single trusted view that connected scattered records into one actionable summary. We scoped down to that core and shipped it in 12 weeks.
+    </div>
+
+    <!-- Constraints that made this hard -->
+    <div class="constraints reveal up">
+      <span class="constraint">First Internship</span>
+      <span class="constraint">B2C Patient Portal</span>
+      <span class="constraint">Health Data Privacy</span>
+      <span class="constraint">12-Week Timeline</span>
+      <span class="constraint">Cross-functional Team</span>
+    </div>
+
+    <div class="meta-row reveal up">
+      <div class="meta-item">
+        <span class="meta-label">Role</span>
+        <span class="meta-value">UX/UI Design Intern</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Company</span>
+        <span class="meta-value">Makahealth</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Tools</span>
+        <span class="meta-value">Figma, Miro, UsabilityHub</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Timeline</span>
+        <!-- PLACEHOLDER: Confirm exact dates -->
+        <span class="meta-value">Summer 2023 · 12 Weeks</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================================================ -->
+  <!-- THE PROBLEM: Brief, not a literature review -->
+  <!-- ================================================ -->
+  <section class="section">
+    <span class="section-label reveal up">The problem</span>
+    <h2 class="reveal up">Patients couldn't see their own health story</h2>
+    <p class="reveal up">
+      <!-- PLACEHOLDER: Rewrite in your voice with your actual problem framing -->
+      Makahealth was building a patient-facing portal to help people manage personal health data — lab results, medications, appointments, provider notes. But existing health apps treated each data type as a separate silo. Patients were expected to navigate between tabs and dashboards to piece together their own health picture.
+    </p>
+    <p class="reveal up">
+      The company's initial brief asked for a comprehensive portal with feature parity to competitor apps. The question was whether building more features was the right approach — or whether patients needed something fundamentally different.
+    </p>
+    <div class="img-full reveal up">
+      <!-- PLACEHOLDER: Insert competitive landscape screenshot or problem-space visual -->
+      Competitive landscape — existing health portals
+    </div>
+  </section>
+
+  <!-- ================================================ -->
+  <!-- EVIDENCE: Converging proof, not process steps -->
+  <!-- Not "first we did research, then we did analysis" -->
+  <!-- Instead: "three sources pointed to the same finding" -->
+  <!-- ================================================ -->
+  <section class="section">
+    <span class="section-label reveal up">Evidence</span>
+    <h2 class="reveal up">Three signals pointed to the same gap</h2>
+    <p class="reveal up">
+      <!-- PLACEHOLDER: Describe how your evidence converged -->
+      Rather than walking through each research method sequentially, here's what mattered: three independent sources converged on the same finding.
+    </p>
+
+    <div class="evidence-grid stagger">
+      <div class="evidence-card reveal up">
+        <div class="ev-type">Competitive Analysis</div>
+        <div class="ev-title">Feature overload, no synthesis</div>
+        <div class="ev-detail">
+          <!-- PLACEHOLDER: Your actual competitive finding -->
+          Analyzed HealthTap, Healow, and 3 other patient portals. All offered raw data access (labs, meds, vitals) but none synthesized it into a unified health narrative. Patients could see individual trees but never the forest.
+        </div>
+      </div>
+
+      <div class="evidence-card reveal up">
+        <div class="ev-type">User Research</div>
+        <div class="ev-title">Patients wanted context, not data</div>
+        <div class="ev-detail">
+          <!-- PLACEHOLDER: Your actual research finding -->
+          Surveyed and interviewed patients about their health tracking habits. The recurring theme: "I can see my numbers, but I don't know what they mean together." They wanted their health story told to them, not handed to them in fragments.
+        </div>
+      </div>
+
+      <div class="evidence-card reveal up">
+        <div class="ev-type">Affinity Mapping</div>
+        <div class="ev-title">Synthesis over access</div>
+        <div class="ev-detail">
+          <!-- PLACEHOLDER: Your actual synthesis finding -->
+          Clustered 120+ data points from research. The dominant cluster wasn't about missing features — it was about missing connections between existing data. Users needed a connective layer, not more endpoints.
+        </div>
+      </div>
+
+      <div class="evidence-card reveal up">
+        <div class="ev-type">Stakeholder Input</div>
+        <div class="ev-title">Clinical team confirmed the pattern</div>
+        <div class="ev-detail">
+          <!-- PLACEHOLDER: Your actual stakeholder insight -->
+          Clinical advisors noted that patients who understood the relationship between their medications, lab results, and lifestyle changes had better adherence rates. The product opportunity was in making those relationships visible.
+        </div>
+      </div>
+    </div>
+
+    <div class="img-row reveal up">
+      <div class="img-cell">
+        <!-- PLACEHOLDER: Affinity map / synthesis screenshot from Figma -->
+        Affinity mapping
+      </div>
+      <div class="img-cell">
+        <!-- PLACEHOLDER: Research questionnaire or key findings visual -->
+        Research findings
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================ -->
+  <!-- THE DECISION: What was designed and WHY -->
+  <!-- With explicit tradeoffs -->
+  <!-- ================================================ -->
+  <section class="section">
+    <span class="section-label reveal left">The decision</span>
+    <h2 class="reveal left">One unified health summary instead of five separate dashboards</h2>
+    <p class="reveal left">
+      <!-- PLACEHOLDER: Describe the core design decision in your own words -->
+      Instead of building feature parity with competitors (separate tabs for labs, medications, appointments, vitals, and notes), we designed a single summary view that connected data points into a patient-readable health narrative. One screen, not five.
+    </p>
+    <p class="reveal left">
+      This meant cutting planned features — the recipe summarizer, detailed vitals history, and appointment scheduling were deprioritized. The core bet: a simpler product that patients actually understood would outperform a comprehensive one they bounced from.
+    </p>
+
+    <!-- Tradeoff block — the heart of the Decisive One Page -->
+    <div class="tradeoff-block reveal left">
+      <div class="tradeoff-side gained">
+        <div class="tradeoff-label">What we gained</div>
+        <!-- PLACEHOLDER: Your actual tradeoffs -->
+        <div class="tradeoff-item">Unified health summary patients could read in under 60 seconds</div>
+        <div class="tradeoff-item">Clear data relationships (labs ↔ medications ↔ lifestyle)</div>
+        <div class="tradeoff-item">Shipped within the 12-week internship window</div>
+        <div class="tradeoff-item">Reduced cognitive load for first-time users</div>
+      </div>
+      <div class="tradeoff-side sacrificed">
+        <div class="tradeoff-label">What we sacrificed</div>
+        <!-- PLACEHOLDER: Your actual tradeoffs -->
+        <div class="tradeoff-item">Recipe summarizer feature (deprioritized to v2)</div>
+        <div class="tradeoff-item">Detailed vitals history and trend charts</div>
+        <div class="tradeoff-item">In-app appointment scheduling</div>
+        <div class="tradeoff-item">Feature parity with competitor portals</div>
+      </div>
+    </div>
+
+    <div class="img-full reveal left">
+      <!-- PLACEHOLDER: Insert your key design screen from Figma — the unified summary view -->
+      Core design — unified health summary screen
+    </div>
+  </section>
+
+  <!-- ================================================ -->
+  <!-- VISUAL DESIGN: Brief, not a separate section -->
+  <!-- ================================================ -->
+  <section class="section">
+    <span class="section-label reveal right">Design language</span>
+    <h2 class="reveal right">Warm, approachable, clinically trustworthy</h2>
+    <p class="reveal right">
+      <!-- PLACEHOLDER: Brief note on visual direction -->
+      Health apps tend toward clinical blues and sterile whites. We chose a warmer palette with the Makahealth brand colors — lively greens and friendly character illustrations — to reduce the anxiety patients feel when viewing health data. The visual tone says "this is approachable" while the information hierarchy says "this is trustworthy."
+    </p>
+
+    <div class="img-row reveal right">
+      <div class="img-cell">
+        <!-- PLACEHOLDER: Color palette / style exploration from Figma -->
+        Color palette & style
+      </div>
+      <div class="img-cell">
+        <!-- PLACEHOLDER: Character/mascot design from Figma -->
+        Character illustrations
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================ -->
+  <!-- FINAL DESIGNS: Proof, not the climax -->
+  <!-- ================================================ -->
+  <section class="section">
+    <span class="section-label reveal up">Final designs</span>
+    <h2 class="reveal up">Key screens from the shipped product</h2>
+    <p class="reveal up">
+      <!-- PLACEHOLDER: Brief context about what we're looking at -->
+      These screens went through user testing and stakeholder review before shipping. The summary view tested significantly better than the multi-tab prototype for task completion and comprehension.
+    </p>
+
+    <div class="img-triple stagger">
+      <div class="img-cell reveal up">
+        <!-- PLACEHOLDER: Final screen 1 from Figma -->
+        Health summary
+      </div>
+      <div class="img-cell reveal up">
+        <!-- PLACEHOLDER: Final screen 2 from Figma -->
+        Lab results detail
+      </div>
+      <div class="img-cell reveal up">
+        <!-- PLACEHOLDER: Final screen 3 from Figma -->
+        Medication view
+      </div>
+    </div>
+
+    <div class="img-triple stagger">
+      <div class="img-cell reveal up">
+        <!-- PLACEHOLDER: Final screen 4 -->
+        Onboarding
+      </div>
+      <div class="img-cell reveal up">
+        <!-- PLACEHOLDER: Final screen 5 -->
+        Profile settings
+      </div>
+      <div class="img-cell reveal up">
+        <!-- PLACEHOLDER: Final screen 6 -->
+        Notifications
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================ -->
+  <!-- OUTCOME: Measurable, not "the client was happy" -->
+  <!-- ================================================ -->
+  <section class="section">
+    <span class="section-label reveal up">Outcome</span>
+    <h2 class="reveal up">What shipping looked like</h2>
+
+    <div class="outcome-row stagger">
+      <!-- PLACEHOLDER: Replace with your actual metrics -->
+      <div class="outcome-stat reveal up">
+        <div class="outcome-number">12wk</div>
+        <div class="outcome-desc">End-to-end from research to shipped product within internship window</div>
+      </div>
+      <div class="outcome-stat reveal up">
+        <!-- PLACEHOLDER -->
+        <div class="outcome-number">1</div>
+        <div class="outcome-desc">Unified summary view replaced 5 planned separate dashboards</div>
+      </div>
+      <div class="outcome-stat reveal up">
+        <!-- PLACEHOLDER -->
+        <div class="outcome-number">↑</div>
+        <div class="outcome-desc">User testing showed improved task completion vs. multi-tab prototype</div>
+      </div>
+    </div>
+
+    <p class="reveal up" style="margin-top: var(--space-lg);">
+      <!-- PLACEHOLDER: Reflection — what you learned, kept brief -->
+      This project taught me that the hardest design decision isn't what to add — it's what to cut. Scoping down to one core view felt risky during the process, but it's what made shipping possible and the product coherent. As a first internship, it also showed me how to navigate real stakeholder dynamics: the clinical team wanted comprehensive data access, the engineering team wanted feasible scope, and patients wanted simplicity. The unified summary was the design that balanced all three.
+    </p>
+  </section>
+
+  <!-- Next project -->
+  <a href="#" class="next-project" style="text-decoration: none;">
+    <div>
+      <div class="next-label">Next project</div>
+      <span class="next-title">Binaural Sounds</span>
+    </div>
+    <span class="next-arrow">→</span>
+  </a>
+
+  <div class="footer-spacer"></div>
+</div>
+
+<!-- Status bar -->
+<div class="status-bar">
+  <span><span class="status-dot"></span>Case Study — Makahealth</span>
+  <span><a href="#">Ji Yang</a> · Seoul / New York</span>
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

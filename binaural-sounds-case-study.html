@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Binaural Sounds — Ji Yang</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #FAF7F2;
+    --bg-secondary: #F0ECE4;
+    --text-primary: #1A1A1A;
+    --text-secondary: #6B6B6B;
+    --text-tertiary: #9B9B9B;
+    --accent: #E8735A;
+    --accent-hover: #D4624B;
+    --border: #E5E0D8;
+    --surface: #FFFFFF;
+    --font-family: 'Space Grotesk', sans-serif;
+    --content-max-width: 780px;
+    --edge-padding: 40px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 64px;
+    --space-2xl: 96px;
+    --space-3xl: 128px;
+    --transition-fast: 0.2s ease;
+    --transition-base: 0.3s ease;
+    --transition-slow: 0.6s ease;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-family);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    letter-spacing: 0.01em;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+  }
+
+  .container {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 var(--edge-padding);
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250, 247, 242, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
+  }
+  nav a {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: color var(--transition-base);
+  }
+  nav a:hover { color: var(--accent); }
+  .nav-logo { font-weight: 700; font-size: 1rem; letter-spacing: -0.02em; }
+  .nav-back { display: flex; align-items: center; gap: 6px; }
+  .nav-back svg { width: 16px; height: 16px; }
+
+  .hero {
+    padding: var(--space-3xl) 0 var(--space-2xl);
+    margin-top: 56px;
+  }
+  .hero-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    margin-bottom: var(--space-md);
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 5vw, 3.75rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin-bottom: var(--space-lg);
+  }
+  .hero-subtitle {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    max-width: 600px;
+  }
+
+  .meta-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--space-lg);
+    padding: var(--space-lg) 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: var(--space-2xl);
+  }
+  .meta-item-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+    margin-bottom: var(--space-xs);
+  }
+  .meta-item-value {
+    font-size: 0.9375rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+
+  section { margin-bottom: var(--space-2xl); }
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    margin-bottom: var(--space-sm);
+  }
+  section h2 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-lg);
+  }
+  section h3 {
+    font-size: 1.375rem;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-md);
+  }
+  section p {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-md);
+  }
+  section p:last-child { margin-bottom: 0; }
+
+  .decisive-insight {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    padding: var(--space-xl) 0;
+    margin: var(--space-2xl) 0;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+  }
+  .decisive-insight .inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 var(--edge-padding);
+  }
+  .decisive-insight .section-label { color: var(--accent); }
+  .decisive-insight p { color: rgba(250, 247, 242, 0.72); }
+  .decisive-insight .highlight-text {
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    color: var(--bg-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .evidence-grid {
+    display: grid;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+  }
+  .evidence-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: var(--space-lg);
+    border-radius: 4px;
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  }
+  .evidence-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  }
+  .evidence-card .card-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    margin-bottom: var(--space-sm);
+  }
+  .evidence-card h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: var(--space-sm);
+  }
+  .evidence-card p { font-size: 0.9375rem; color: var(--text-secondary); }
+
+  .user-quote {
+    border-left: 2px solid var(--accent);
+    padding: var(--space-md) 0 var(--space-md) var(--space-lg);
+    margin: var(--space-lg) 0;
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+  .user-quote cite {
+    display: block;
+    font-style: normal;
+    font-size: 0.8125rem;
+    color: var(--text-tertiary);
+    margin-top: var(--space-sm);
+    font-weight: 500;
+  }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+    margin: var(--space-xl) 0;
+    text-align: center;
+  }
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: var(--space-xs);
+  }
+  .stat-number .a { color: var(--accent); }
+  .stat-desc {
+    font-size: 0.8125rem;
+    color: var(--text-tertiary);
+    line-height: 1.4;
+  }
+
+  .persona-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+  }
+  .persona-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: var(--space-lg);
+    border-radius: 4px;
+  }
+  .persona-card .ptag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    margin-bottom: var(--space-sm);
+  }
+  .persona-card h4 { font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-xs); }
+  .persona-card .pdemo { font-size: 0.875rem; color: var(--text-tertiary); margin-bottom: var(--space-md); }
+  .persona-card .pquote { font-size: 0.9375rem; font-style: italic; color: var(--text-secondary); margin-bottom: var(--space-md); line-height: 1.5; }
+  .persona-card .pneeds { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; }
+  .tag-group { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: var(--space-md); }
+  .tag {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--text-tertiary);
+  }
+
+  .kano-section { margin-top: var(--space-lg); }
+  .kano-tier { padding: var(--space-lg) 0; border-bottom: 1px solid var(--border); }
+  .kano-tier:last-child { border-bottom: none; }
+  .kano-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-sm);
+  }
+  .kano-label.must { color: var(--text-tertiary); }
+  .kano-label.perf { color: var(--text-secondary); }
+  .kano-label.exc { color: var(--accent); }
+  .kano-tier h4 { font-size: 1.125rem; font-weight: 600; margin-bottom: var(--space-sm); }
+  .kano-tier p { font-size: 0.9375rem; color: var(--text-secondary); }
+
+  .feature-table {
+    width: 100%;
+    margin-top: var(--space-lg);
+    border-collapse: collapse;
+  }
+  .feature-table th {
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .feature-table td {
+    padding: var(--space-md) var(--space-md) var(--space-md) 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .feature-table td:first-child { font-weight: 500; color: var(--text-primary); width: 28%; }
+
+  .tradeoff-block {
+    background: var(--bg-secondary);
+    padding: var(--space-lg);
+    border-radius: 4px;
+    margin: var(--space-xl) 0;
+  }
+  .tradeoff-block h4 { font-size: 1rem; font-weight: 600; margin-bottom: var(--space-md); }
+  .tradeoff-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
+  .tradeoff-col .tl {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+    margin-bottom: var(--space-sm);
+  }
+  .tradeoff-col p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.6; }
+
+  .outcome-block {
+    border: 2px solid var(--accent);
+    padding: var(--space-xl) var(--space-lg);
+    border-radius: 4px;
+    margin: var(--space-xl) 0;
+    text-align: center;
+  }
+  .outcome-block .section-label { margin-bottom: var(--space-md); }
+  .outcome-block h3 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: var(--space-md); }
+  .outcome-block p { color: var(--text-secondary); max-width: 560px; margin: 0 auto; }
+
+  .divider { height: 1px; background: var(--border); margin: var(--space-2xl) 0; }
+
+  footer {
+    padding: var(--space-xl) 0;
+    border-top: 1px solid var(--border);
+    margin-top: var(--space-2xl);
+  }
+  footer .container { display: flex; justify-content: space-between; align-items: center; }
+  footer p { font-size: 0.8125rem; color: var(--text-tertiary); }
+  footer a { color: var(--accent); text-decoration: none; font-size: 0.875rem; font-weight: 500; }
+  footer a:hover { color: var(--accent-hover); }
+
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 640px) {
+    :root { --edge-padding: 24px; }
+    .hero h1 { font-size: 2rem; }
+    .stat-row { grid-template-columns: 1fr; gap: var(--space-lg); }
+    .persona-grid { grid-template-columns: 1fr; }
+    .tradeoff-row { grid-template-columns: 1fr; }
+    .meta-row { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="#" class="nav-back">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8L10 13"/></svg>
+      All Projects
+    </a>
+    <a href="#" class="nav-logo">Ji Yang</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-label fade-in">Case Study</div>
+    <h1 class="fade-in">Binaural Sounds</h1>
+    <p class="hero-subtitle fade-in">Designing a music-based emotional tuning service that adapts to users' routines, mental states, and daily rhythms — grounded in 15 in-depth interviews and the KANO model.</p>
+  </div>
+</header>
+
+<div class="container">
+  <div class="meta-row fade-in">
+    <div>
+      <div class="meta-item-label">Role</div>
+      <div class="meta-item-value">UX Researcher &<br>Service Designer</div>
+    </div>
+    <div>
+      <div class="meta-item-label">Client</div>
+      <div class="meta-item-value">PeopleBio ×<br>TXGroup</div>
+    </div>
+    <div>
+      <div class="meta-item-label">Timeline</div>
+      <div class="meta-item-value">Sep 2025 –<br>Mar 2026</div>
+    </div>
+    <div>
+      <div class="meta-item-label">Methods</div>
+      <div class="meta-item-value">In-depth Interview, Persona, KANO Model, STP</div>
+    </div>
+  </div>
+</div>
+
+<div class="decisive-insight">
+  <div class="inner">
+    <div class="section-label fade-in">Decisive Insight</div>
+    <p class="highlight-text fade-in">Users don't want another meditation app. They need <em>a living soundtrack</em> — one that senses their rhythm, adapts to their emotional state, and removes the friction of choosing the right sound at the right time.</p>
+    <p class="fade-in">Across 15 interviews totaling 13.96 hours, a single pattern emerged: the gap between users and sound-based wellness isn't about content quality — it's about <strong style="color: var(--bg-primary);">contextual automation</strong>. Users already believe sound regulates their state. They just can't sustain the habit because every session requires manual effort — searching, choosing, adjusting — in moments when their cognitive bandwidth is already depleted.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <section class="fade-in">
+    <div class="section-label">01 — Problem</div>
+    <h2>Sound wellness tools fail where users need them most</h2>
+    <p>PeopleBio, a Korean biotech company specializing in early neurodegenerative disease detection, wanted to explore binaural beats as a wellness intervention. The market was saturated with sleep and focus apps, yet user retention remained low and services felt interchangeable. They engaged TXGroup to uncover why.</p>
+    <p>The core question: if binaural beats and music genuinely help users manage sleep, focus, and anxiety, <em>why do they stop using them?</em></p>
+  </section>
+
+  <div class="stat-row fade-in">
+    <div>
+      <div class="stat-number">15</div>
+      <div class="stat-desc">In-depth interviews<br>(20s – 50s, mixed occupations)</div>
+    </div>
+    <div>
+      <div class="stat-number">550<span class="a">+</span></div>
+      <div class="stat-desc">Insightful keywords<br>extracted from interviews</div>
+    </div>
+    <div>
+      <div class="stat-number">~14<span class="a">hr</span></div>
+      <div class="stat-desc">Total interview hours<br>across all participants</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <section class="fade-in">
+    <div class="section-label">02 — Evidence</div>
+    <h2>What 15 interviews revealed</h2>
+    <p>Interviews surfaced two distinct user archetypes — not by demographics, but by how users regulate their daily rhythm. This framing became the lens for every subsequent design decision.</p>
+  </section>
+
+  <div class="user-quote fade-in">
+    "I try to set my environment for focus — the right lighting, the right sound — but my schedule changes every day. By the time I find the right track, I've lost the moment."
+    <cite>— Participant 03, 39F, Freelance Designer</cite>
+  </div>
+
+  <div class="user-quote fade-in">
+    "My routine is my religion. The same playlist every night. But if something breaks the pattern, I spiral. I just need it to happen automatically."
+    <cite>— Participant 05, 43M, Business Owner</cite>
+  </div>
+
+  <div class="evidence-grid fade-in">
+    <div class="evidence-card">
+      <div class="card-label">Finding 01</div>
+      <h4>Two archetypes, one need</h4>
+      <p>"Routine-based Focusers" maintain rigid daily rhythms and need sound automation that never breaks their flow. "Spontaneous Immersion-seekers" have fluid schedules and need adaptive sound that reads their current state. Both converge on the same core need: reducing the cognitive load of choosing sound.</p>
+    </div>
+    <div class="evidence-card">
+      <div class="card-label">Finding 02</div>
+      <h4>Sleep quality ↔ Anxiety is a feedback loop</h4>
+      <p>70%+ of participants reported moderate-to-high anxiety. Poor sleep quality led to increased music dependency for anxiety relief, which paradoxically disrupted sleep patterns further. The intervention point isn't sleep or focus — it's the cycle between them.</p>
+    </div>
+    <div class="evidence-card">
+      <div class="card-label">Finding 03</div>
+      <h4>Sound is already a self-regulation tool</h4>
+      <p>Users don't treat music as background noise. They actively use it to transition between mental states — work-mode to rest, anxiety to calm, drowsiness to alertness. White noise, café sounds, and rhythmic music serve functional, not aesthetic, purposes.</p>
+    </div>
+    <div class="evidence-card">
+      <div class="card-label">Finding 04</div>
+      <h4>Existing apps feel mechanical, not human</h4>
+      <p>Multiple participants described current wellness apps as "robotic" and "soulless." YouTube was preferred despite worse UX because creators provided a sense of human presence and emotional connection that clinical apps lacked.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <section class="fade-in">
+    <div class="section-label">03 — Personas</div>
+    <h2>Two rhythms, one service</h2>
+    <p>Rather than demographic segments, personas were defined by self-regulation patterns — how users structure (or fail to structure) their relationship with time, energy, and sound.</p>
+  </section>
+
+  <div class="persona-grid fade-in">
+    <div class="persona-card">
+      <div class="ptag">Persona A — Spontaneous</div>
+      <h4>Sumin Kim</h4>
+      <div class="pdemo">32F · Freelance Content Planner · Seoul</div>
+      <div class="pquote">"My clock is just an accessory."</div>
+      <div class="pneeds">Chronic fatigue from irregular patterns. Uses sound reactively — to recover from burnout, not prevent it. Needs a service that creates rhythm <em>for</em> her when she can't do it herself. Emotion-driven, high anxiety, low routine adherence.</div>
+      <div class="tag-group">
+        <span class="tag">Irregular routine</span>
+        <span class="tag">Emotion-driven</span>
+        <span class="tag">Sleep delay</span>
+        <span class="tag">Fatigue cycle</span>
+      </div>
+    </div>
+    <div class="persona-card">
+      <div class="ptag">Persona B — Structured</div>
+      <h4>Sungho Park</h4>
+      <div class="pdemo">48M · Corporate Manager · Seoul</div>
+      <div class="pquote">"Routine is my faith."</div>
+      <div class="pneeds">Highly regimented daily schedule. Uses the same playlist nightly as a wind-down ritual. Breaks in routine cause disproportionate stress. Needs automated scheduling that never misses a beat, and sound that reinforces existing patterns.</div>
+      <div class="tag-group">
+        <span class="tag">Routine-dependent</span>
+        <span class="tag">Stability-seeking</span>
+        <span class="tag">Auto-play</span>
+        <span class="tag">Pattern-based</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <section class="fade-in">
+    <div class="section-label">04 — Design Decision</div>
+    <h2>KANO-driven feature prioritization</h2>
+    <p>Using the KANO model, I mapped user needs into three tiers to ensure the MVP focused on foundational expectations before investing in delight features. This prevented the common trap of building flashy personalization without solving basic friction first.</p>
+  </section>
+
+  <div class="kano-section fade-in">
+    <div class="kano-tier">
+      <div class="kano-label must">Must-Be — Baseline expectations</div>
+      <h4>Frictionless, interruption-free listening</h4>
+      <p>No ads, no jarring transitions, no earphone fatigue. Minimize search fatigue through automated curation. Ensure psychological safety through consistent ambient background. Users expect these by default — their absence causes dissatisfaction, but their presence doesn't delight.</p>
+    </div>
+    <div class="kano-tier">
+      <div class="kano-label perf">Performance — Satisfaction scales linearly</div>
+      <h4>Personalized sound matching + routine-based auto-play</h4>
+      <p>Sound recommendations adapt to emotional state, focus level, and fatigue. Routine schedules auto-trigger playlists at the right time. The better the personalization and the more reliable the automation, the higher user satisfaction — proportionally.</p>
+    </div>
+    <div class="kano-tier">
+      <div class="kano-label exc">Excitement — Unexpected delight</div>
+      <h4>Situational automation + emotion-responsive music</h4>
+      <p>TPO (time/place/occasion) context-switching where sound adapts as the user's environment changes. Emotion card interactions that help users identify and express feelings before the service responds. These features create "wow" moments that differentiate from every competitor.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <section class="fade-in">
+    <div class="section-label">05 — Core Features</div>
+    <h2>Five features, each traced to a pain point</h2>
+  </section>
+
+  <table class="feature-table fade-in">
+    <thead><tr><th>Feature</th><th>Pain Point → Solution</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>TPO Auto Scheduler</td>
+        <td>Existing apps require manual setup every session → Auto-play customized sound based on time, location, and calendar-based routine detection.</td>
+      </tr>
+      <tr>
+        <td>Focus Mode Widget</td>
+        <td>High barrier to entering flow state → Multiple real-time focus modes accessible via a quick-launch widget, reducing transition time.</td>
+      </tr>
+      <tr>
+        <td>Emotion Card System</td>
+        <td>Chronic anxiety with no self-awareness tools → Card-based emotional expression that helps users recognize and articulate their state before receiving matched sound.</td>
+      </tr>
+      <tr>
+        <td>Sleep Auto-Setting</td>
+        <td>Sleep quality degradation and wakefulness → Automatically configure sleep-optimized sound environments at the user's set bedtime.</td>
+      </tr>
+      <tr>
+        <td>Social Sharing</td>
+        <td>Mechanical, lonely service experience → Routine and experience sharing with comment-based feedback loops to build emotional connection.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tradeoff-block fade-in">
+    <h4>Trade-offs Considered</h4>
+    <div class="tradeoff-row">
+      <div class="tradeoff-col">
+        <div class="tl">What we prioritized</div>
+        <p>Contextual automation (TPO + routine detection) over content volume. An emotion card system that creates self-awareness before serving content, rather than a passive recommendation engine. Human warmth in UX language over clinical precision.</p>
+      </div>
+      <div class="tradeoff-col">
+        <div class="tl">What we deprioritized</div>
+        <p>Biometric hardware integration (wearable heart rate sensors) — too high a barrier for MVP despite strong user interest. Community features scoped as post-launch. Gamification mechanics rejected as incongruent with the calm, wellness-first tone.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <section class="fade-in">
+    <div class="section-label">06 — Design Direction</div>
+    <h2>From research to concept</h2>
+    <p>Five concept keywords emerged from synthesis: Emotional Flow, Focus Orbit, Flow Sanctuary, Inner Sync, and Mind Alignment. The winning direction — <em>Inner Sync</em> — best captured the service's core promise: real-time synchronization between the user's internal emotional state and their sound environment.</p>
+    <p>The visual and interaction design drew from serene, warm interior aesthetics — spaces that feel lived-in rather than clinical. UI prototypes featured soft gradients, natural color palettes, and breathing animations that mirror the rhythm of binaural beat frequencies.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <div class="outcome-block fade-in">
+    <div class="section-label">Outcome</div>
+    <h3>Research delivered. Design phase in progress.</h3>
+    <p>The research deliverable — including the KANO model, persona frameworks, user journey maps, and feature specifications — was accepted by PeopleBio as the foundation for the UX/UI prototyping phase (Dec 2025 – Mar 2026). The team is now translating these insights into high-fidelity screens and a design system.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <section class="fade-in">
+    <div class="section-label">07 — Reflection</div>
+    <h2>What I learned</h2>
+    <p>This project reinforced that the most powerful design insight is often about <em>when</em> and <em>how</em> a service enters the user's life — not just what it offers. Users already believed in binaural beats. The bottleneck was contextual: the right sound at the wrong moment is just noise.</p>
+    <p>Conducting 15 in-depth interviews in Korean across age groups sharpened my ability to synthesize qualitative data into actionable frameworks. The KANO model proved especially valuable as a communication tool with the client — it translated subjective user feedback into a prioritization language that engineering and business stakeholders could immediately act on.</p>
+  </section>
+
+</div>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2026 Ji Yang</p>
+    <a href="#" id="btt">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 60);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+document.getElementById('btt').addEventListener('click', e => {
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+
+</body>
+</html>
