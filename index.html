@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ji Yang — UX/UI Product Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #FAF7F2;
+    --bg-secondary: #F0ECE4;
+    --text-primary: #1A1A1A;
+    --text-secondary: #6B6B6B;
+    --text-tertiary: #9B9B9B;
+    --accent: #E8735A;
+    --accent-hover: #D4624B;
+    --border: #E5E0D8;
+    --surface: #FFFFFF;
+    --font-family: 'Space Grotesk', sans-serif;
+    --content-max-width: 780px;
+    --edge-padding: 40px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 64px;
+    --space-2xl: 96px;
+    --space-3xl: 128px;
+    --transition-fast: 0.2s ease;
+    --transition-base: 0.3s ease;
+    --transition-slow: 0.6s ease;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-family);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    letter-spacing: 0.01em;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+  }
+
+  .page {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 var(--edge-padding);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Nav */
+  nav {
+    padding: var(--space-lg) 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-name {
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: var(--space-lg);
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    text-decoration: none;
+    position: relative;
+    transition: color var(--transition-base);
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width 0.4s ease;
+  }
+  .nav-links a:hover { color: var(--text-primary); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* Hero */
+  .hero {
+    padding: var(--space-3xl) 0 var(--space-2xl);
+  }
+  .hero-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    margin-bottom: var(--space-md);
+  }
+  .hero h1 {
+    font-size: clamp(2.75rem, 6vw, 4rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: var(--space-lg);
+  }
+  .hero-intro {
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    max-width: 600px;
+  }
+  .hero-intro strong {
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  /* Section */
+  .section {
+    padding: var(--space-2xl) 0;
+  }
+  .section + .section {
+    border-top: 1px solid var(--border);
+  }
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+    margin-bottom: var(--space-md);
+  }
+  .section h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-lg);
+  }
+  .section p {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-md);
+    max-width: 640px;
+  }
+
+  /* Project cards */
+  .project-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+  }
+  .project-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: var(--space-xl) var(--space-lg);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    position: relative;
+  }
+  .project-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.04);
+    transform: translateY(-2px);
+  }
+  .project-card .card-number {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    margin-bottom: var(--space-sm);
+  }
+  .project-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-sm);
+    line-height: 1.2;
+  }
+  .project-card .card-subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    margin-bottom: var(--space-md);
+    max-width: 560px;
+  }
+  .project-card .card-meta {
+    display: flex;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+  }
+  .project-card .meta-tag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+  }
+  .project-card .card-arrow {
+    position: absolute;
+    right: var(--space-lg);
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.25rem;
+    color: var(--text-tertiary);
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+  .project-card:hover .card-arrow {
+    transform: translateY(-50%) translateX(4px);
+    color: var(--accent);
+  }
+
+  /* About */
+  .about-content {
+    max-width: 640px;
+  }
+  .about-content p {
+    margin-bottom: var(--space-md);
+  }
+
+  /* Contact links */
+  .contact-links {
+    display: flex;
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+    margin-top: var(--space-lg);
+  }
+  .contact-link {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+  .contact-link .cl-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+  }
+  .contact-link a {
+    font-size: 0.9375rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color var(--transition-base);
+  }
+  .contact-link a:hover {
+    color: var(--accent);
+  }
+
+  /* Status bar */
+  .status-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    padding: 12px var(--edge-padding);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border);
+  }
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: inline-block;
+    margin-right: 8px;
+    animation: pulse 3s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  .status-bar a {
+    color: var(--text-tertiary);
+    text-decoration: none;
+    transition: color var(--transition-base);
+  }
+  .status-bar a:hover { color: var(--accent); }
+
+  .footer-spacer { height: 80px; }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .stagger > .reveal:nth-child(1) { transition-delay: 0ms; }
+  .stagger > .reveal:nth-child(2) { transition-delay: 100ms; }
+  .stagger > .reveal:nth-child(3) { transition-delay: 200ms; }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    :root { --edge-padding: 24px; }
+    .hero h1 { font-size: 2.5rem; }
+    .hero-intro { font-size: 1.125rem; }
+    .project-card .card-arrow { display: none; }
+    .contact-links { gap: var(--space-lg); }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <nav>
+    <a href="index.html" class="nav-name">Ji Yang</a>
+    <ul class="nav-links">
+      <li><a href="#works">Works</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-label reveal">UX/UI Product Designer</div>
+    <h1 class="reveal">Ji Yang</h1>
+    <p class="hero-intro reveal">
+      I design products grounded in <strong>research and reasoning</strong> — leading with the decisive insight, not the process. Based in <strong>New York &amp; Seoul</strong>.
+    </p>
+  </header>
+
+  <section class="section" id="works">
+    <span class="section-label reveal">Selected works</span>
+    <h2 class="reveal">Case Studies</h2>
+
+    <div class="project-list stagger">
+
+      <a href="works/binaural-sounds-case-study.html" class="project-card reveal">
+        <div class="card-number">01</div>
+        <h3>Binaural Sounds</h3>
+        <p class="card-subtitle">Designing a music-based emotional tuning service grounded in 15 in-depth interviews and the KANO model. Users don't want another meditation app — they need a living soundtrack.</p>
+        <div class="card-meta">
+          <span class="meta-tag">UX Research</span>
+          <span class="meta-tag">Service Design</span>
+          <span class="meta-tag">KANO Model</span>
+        </div>
+        <span class="card-arrow">&rarr;</span>
+      </a>
+
+      <a href="works/plowguys-case-study.html" class="project-card reveal">
+        <div class="card-number">02</div>
+        <h3>Plowguys</h3>
+        <p class="card-subtitle">Redesigning a crew member app for snow removal workers — where thick gloves, harsh weather, and split-second task management demanded an interface built for the field.</p>
+        <div class="card-meta">
+          <span class="meta-tag">UX Audit</span>
+          <span class="meta-tag">Heuristic Evaluation</span>
+          <span class="meta-tag">Prototype</span>
+        </div>
+        <span class="card-arrow">&rarr;</span>
+      </a>
+
+      <a href="works/makahealth-case-study.html" class="project-card reveal">
+        <div class="card-number">03</div>
+        <h3>Makahealth</h3>
+        <p class="card-subtitle">Patients didn't need more health data — they needed a single trusted view that connected scattered records into one actionable summary. Shipped in 12 weeks.</p>
+        <div class="card-meta">
+          <span class="meta-tag">B2C Patient Portal</span>
+          <span class="meta-tag">UX/UI Design</span>
+          <span class="meta-tag">Internship</span>
+        </div>
+        <span class="card-arrow">&rarr;</span>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <span class="section-label reveal">About</span>
+    <h2 class="reveal">Designing with reasoning, not ritual</h2>
+    <div class="about-content">
+      <p class="reveal">
+        I'm a UX/UI product designer who believes the strongest portfolios lead with <strong>design decisions and their trade-offs</strong> — not a linear walk through Research &rarr; Persona &rarr; Journey Map &rarr; Final Design.
+      </p>
+      <p class="reveal">
+        Every case study here follows the <em>Decisive One Page</em> structure: Problem &rarr; Hypothesis &rarr; Evidence &rarr; Design Decision with trade-offs &rarr; Outcome. If you can't find the insight in 30 seconds, the page failed.
+      </p>
+      <p class="reveal">
+        Currently exploring vibe coding, AI-assisted design tools, and the intersection of research rigor with rapid prototyping.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <span class="section-label reveal">Get in touch</span>
+    <h2 class="reveal">Let's connect</h2>
+    <div class="contact-links reveal">
+      <div class="contact-link">
+        <span class="cl-label">LinkedIn</span>
+        <a href="https://linkedin.com/in/ji-yang-0301" target="_blank" rel="noopener">ji-yang-0301</a>
+      </div>
+      <div class="contact-link">
+        <span class="cl-label">Portfolio</span>
+        <a href="https://warmplacebyji.com" target="_blank" rel="noopener">warmplacebyji.com</a>
+      </div>
+      <div class="contact-link">
+        <span class="cl-label">GitHub</span>
+        <a href="https://github.com/mickie0917" target="_blank" rel="noopener">mickie0917</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer-spacer"></div>
+
+</div>
+
+<div class="status-bar">
+  <span><span class="status-dot"></span>Available for opportunities</span>
+  <span><a href="https://linkedin.com/in/ji-yang-0301" target="_blank" rel="noopener">Ji Yang</a> &middot; Seoul / New York</span>
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
