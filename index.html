@@ -504,8 +504,17 @@
 </div>
 
 <div class="status-bar">
-  <span><span class="status-dot"></span>Available for opportunities</span>
-  <span><a href="https://linkedin.com/in/ji-yang-0301" target="_blank" rel="noopener">Ji Yang</a> &middot; Seoul / New York</span>
+  <div class="status-left">
+    <div class="terminal-dots">
+      <span class="dot-red"></span>
+      <span class="dot-yellow"></span>
+      <span class="dot-green"></span>
+    </div>
+    <span class="terminal-cmd"><span class="prompt">$</span> cat ~/portfolio/ji-yang<span class="terminal-cursor"></span></span>
+  </div>
+  <div class="status-right">
+    <button class="lang-toggle" id="langToggle" title="Switch to Korean">EN / KR</button>
+  </div>
 </div>
 
 <script>
@@ -515,6 +524,94 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Korean translation toggle
+const translations = {
+  en: {
+    heroLabel: 'UX/UI Product Designer',
+    heroTitle: 'Ji Yang',
+    heroIntro: 'I design products grounded in <strong>research and reasoning</strong> \u2014 leading with the decisive insight, not the process. Based in <strong>New York &amp; Seoul</strong>.',
+    worksLabel: 'Selected works',
+    worksTitle: 'Case Studies',
+    p1Number: '01', p1Title: 'Binaural Sounds',
+    p1Sub: 'Designing a music-based emotional tuning service grounded in 15 in-depth interviews and the KANO model. Users don\u2019t want another meditation app \u2014 they need a living soundtrack.',
+    p2Number: '02', p2Title: 'Plowguys',
+    p2Sub: 'Redesigning a crew member app for snow removal workers \u2014 where thick gloves, harsh weather, and split-second task management demanded an interface built for the field.',
+    p3Number: '03', p3Title: 'Makahealth',
+    p3Sub: 'Patients didn\u2019t need more health data \u2014 they needed a single trusted view that connected scattered records into one actionable summary. Shipped in 12 weeks.',
+    aboutLabel: 'About',
+    aboutTitle: 'Designing with reasoning, not ritual',
+    aboutP1: 'I\u2019m a UX/UI product designer who believes the strongest portfolios lead with <strong>design decisions and their trade-offs</strong> \u2014 not a linear walk through Research \u2192 Persona \u2192 Journey Map \u2192 Final Design.',
+    aboutP2: 'Every case study here follows the <em>Decisive One Page</em> structure: Problem \u2192 Hypothesis \u2192 Evidence \u2192 Design Decision with trade-offs \u2192 Outcome. If you can\u2019t find the insight in 30 seconds, the page failed.',
+    aboutP3: 'Currently exploring vibe coding, AI-assisted design tools, and the intersection of research rigor with rapid prototyping.',
+    contactLabel: 'Get in touch',
+    contactTitle: 'Let\u2019s connect',
+    langBtn: 'EN / KR',
+  },
+  kr: {
+    heroLabel: 'UX/UI \uD504\uB85C\uB355\uD2B8 \uB514\uC790\uC774\uB108',
+    heroTitle: '\uC591\uC9C0',
+    heroIntro: '<strong>\uB9AC\uC11C\uCE58\uC640 \uB17C\uB9AC\uC801 \uADFC\uAC70</strong>\uC5D0 \uAE30\uBC18\uD55C \uD504\uB85C\uB355\uD2B8 \uB514\uC790\uC778 \u2014 \uD504\uB85C\uC138\uC2A4\uAC00 \uC544\uB2CC \uACB0\uC815\uC801 \uC778\uC0AC\uC774\uD2B8\uB97C \uC55E\uC138\uC6C0\uB2C8\uB2E4. <strong>\uB274\uC695 &amp; \uC11C\uC6B8</strong> \uAE30\uBC18.',
+    worksLabel: '\uC8FC\uC694 \uC791\uC5C5\uBB3C',
+    worksTitle: '\uCF00\uC774\uC2A4 \uC2A4\uD130\uB514',
+    p1Number: '01', p1Title: 'Binaural Sounds',
+    p1Sub: '15\uAC74\uC758 \uC2EC\uCE35 \uC778\uD130\uBDF0\uC640 KANO \uBAA8\uB378\uC744 \uAE30\uBC18\uC73C\uB85C \uD55C \uC74C\uC545 \uAE30\uBC18 \uAC10\uC815 \uD29C\uB2DD \uC11C\uBE44\uC2A4 \uB514\uC790\uC778. \uC0AC\uC6A9\uC790\uB294 \uB610 \uB2E4\uB978 \uBA85\uC0C1 \uC571\uC774 \uC544\uB2CC, \uC0B4\uC544\uC788\uB294 \uC0AC\uC6B4\uB4DC\uD2B8\uB799\uC744 \uC6D0\uD569\uB2C8\uB2E4.',
+    p2Number: '02', p2Title: 'Plowguys',
+    p2Sub: '\uB450\uAEBC\uC6B4 \uC7A5\uAC11, \uD639\uB3C5\uD55C \uB0A0\uC528, \uC21C\uAC04\uC801\uC778 \uC791\uC5C5 \uAD00\uB9AC\uAC00 \uC694\uAD6C\uB418\uB294 \uD604\uC7A5\uC744 \uC704\uD574 \uB9CC\uB4E0 \uC81C\uC124 \uC791\uC5C5\uC790 \uC571 \uB9AC\uB514\uC790\uC778.',
+    p3Number: '03', p3Title: 'Makahealth',
+    p3Sub: '\uD658\uC790\uB4E4\uC5D0\uAC8C \uD544\uC694\uD55C \uAC83\uC740 \uB354 \uB9CE\uC740 \uAC74\uAC15 \uB370\uC774\uD130\uAC00 \uC544\uB2CC, \uD761\uC5B4\uC9C4 \uAE30\uB85D\uC744 \uD558\uB098\uC758 \uC2E4\uD589 \uAC00\uB2A5\uD55C \uC694\uC57D\uC73C\uB85C \uC5F0\uACB0\uD558\uB294 \uC2E0\uB8B0\uD560 \uC218 \uC788\uB294 \uBDF0\uC600\uC2B5\uB2C8\uB2E4. 12\uC8FC \uB9CC\uC5D0 \uCD9C\uC2DC.',
+    aboutLabel: '\uC18C\uAC1C',
+    aboutTitle: '\uC758\uB840\uAC00 \uC544\uB2CC, \uB17C\uB9AC\uB85C \uB514\uC790\uC778\uD558\uB2E4',
+    aboutP1: '\uAC00\uC7A5 \uAC15\uB825\uD55C \uD3EC\uD2B8\uD3F4\uB9AC\uC624\uB294 Research \u2192 Persona \u2192 Journey Map \u2192 Final Design\uC774 \uC544\uB2CC, <strong>\uB514\uC790\uC778 \uACB0\uC815\uACFC \uADF8 \uD2B8\uB808\uC774\uB4DC\uC624\uD504</strong>\uB85C \uC774\uB04C\uC5B4\uC57C \uD55C\uB2E4\uACE0 \uBBFF\uC2B5\uB2C8\uB2E4.',
+    aboutP2: '\uBAA8\uB4E0 \uCF00\uC774\uC2A4 \uC2A4\uD130\uB514\uB294 <em>Decisive One Page</em> \uAD6C\uC870\uB97C \uB530\uB985\uB2C8\uB2E4: \uBB38\uC81C \u2192 \uAC00\uC124 \u2192 \uADFC\uAC70 \u2192 \uD2B8\uB808\uC774\uB4DC\uC624\uD504\uB97C \uD3EC\uD568\uD55C \uB514\uC790\uC778 \uACB0\uC815 \u2192 \uACB0\uACFC. 30\uCD08 \uC548\uC5D0 \uC778\uC0AC\uC774\uD2B8\uB97C \uCC3E\uC744 \uC218 \uC5C6\uB2E4\uBA74 \uD398\uC774\uC9C0\uB294 \uC2E4\uD328\uD55C \uAC83\uC785\uB2C8\uB2E4.',
+    aboutP3: '\uD604\uC7AC \uBC14\uC774\uBE0C \uCF54\uB529, AI \uB514\uC790\uC778 \uB3C4\uAD6C, \uB9AC\uC11C\uCE58\uC758 \uC5C4\uBC00\uD568\uACFC \uBE60\uB978 \uD504\uB85C\uD1A0\uD0C0\uC774\uD551\uC758 \uAD50\uCC28\uC810\uC744 \uD0D0\uAD6C\uD558\uACE0 \uC788\uC2B5\uB2C8\uB2E4.',
+    contactLabel: '\uC5F0\uB77D\uCC98',
+    contactTitle: '\uC5F0\uB77D\uC8FC\uC138\uC694',
+    langBtn: 'KR / EN',
+  }
+};
+
+let currentLang = 'en';
+const langBtn = document.getElementById('langToggle');
+
+langBtn.addEventListener('click', () => {
+  currentLang = currentLang === 'en' ? 'kr' : 'en';
+  const t = translations[currentLang];
+  langBtn.classList.toggle('active', currentLang === 'kr');
+  langBtn.textContent = t.langBtn;
+
+  // Hero
+  document.querySelector('.hero-label').textContent = t.heroLabel;
+  document.querySelector('.hero h1').textContent = t.heroTitle;
+  document.querySelector('.hero-intro').innerHTML = t.heroIntro;
+
+  // Works
+  document.querySelector('#works .section-label').textContent = t.worksLabel;
+  document.querySelector('#works h2').textContent = t.worksTitle;
+
+  const cards = document.querySelectorAll('.project-card');
+  cards[0].querySelector('.card-number').textContent = t.p1Number;
+  cards[0].querySelector('h3').textContent = t.p1Title;
+  cards[0].querySelector('.card-subtitle').textContent = t.p1Sub;
+  cards[1].querySelector('.card-number').textContent = t.p2Number;
+  cards[1].querySelector('h3').textContent = t.p2Title;
+  cards[1].querySelector('.card-subtitle').textContent = t.p2Sub;
+  cards[2].querySelector('.card-number').textContent = t.p3Number;
+  cards[2].querySelector('h3').textContent = t.p3Title;
+  cards[2].querySelector('.card-subtitle').textContent = t.p3Sub;
+
+  // About
+  document.querySelector('#about .section-label').textContent = t.aboutLabel;
+  document.querySelector('#about h2').textContent = t.aboutTitle;
+  const aboutPs = document.querySelectorAll('.about-content p');
+  aboutPs[0].innerHTML = t.aboutP1;
+  aboutPs[1].innerHTML = t.aboutP2;
+  aboutPs[2].innerHTML = t.aboutP3;
+
+  // Contact
+  document.querySelector('#contact .section-label').textContent = t.contactLabel;
+  document.querySelector('#contact h2').textContent = t.contactTitle;
+});
 </script>
 
 </body>
