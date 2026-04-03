@@ -6,7 +6,7 @@
 <title>Ji Yang — UX/UI Product Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg-primary: #FAF7F2;
@@ -19,6 +19,7 @@
     --border: #E5E0D8;
     --surface: #FFFFFF;
     --font-family: 'Space Grotesk', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
     --content-max-width: 780px;
     --edge-padding: 40px;
     --space-xs: 4px;
@@ -50,7 +51,21 @@
     letter-spacing: 0.01em;
   }
 
+  /* Grid paper background */
   body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.06;
+    background-image:
+      linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  /* Grain overlay */
+  body::after {
     content: '';
     position: fixed;
     inset: 0;
@@ -275,46 +290,93 @@
     color: var(--accent);
   }
 
-  /* Status bar */
+  /* Terminal status bar */
   .status-bar {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     z-index: 999;
-    padding: 12px var(--edge-padding);
+    padding: 0;
     display: flex;
-    justify-content: space-between;
+    align-items: stretch;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    background: var(--text-primary);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    height: 40px;
+  }
+  .status-left {
+    display: flex;
     align-items: center;
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--text-tertiary);
-    background: var(--bg-primary);
-    border-top: 1px solid var(--border);
+    gap: 6px;
+    padding: 0 16px;
   }
-  .status-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    display: inline-block;
+  .terminal-dots {
+    display: flex;
+    gap: 5px;
     margin-right: 8px;
-    animation: pulse 3s ease-in-out infinite;
   }
-  @keyframes pulse {
+  .terminal-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .terminal-dots .dot-red { background: #FF5F57; }
+  .terminal-dots .dot-yellow { background: #FFBD2E; }
+  .terminal-dots .dot-green { background: #28C840; }
+  .terminal-cmd {
+    color: rgba(250,247,242,0.5);
+  }
+  .terminal-cmd .prompt {
+    color: var(--accent);
+  }
+  .terminal-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 15px;
+    background: rgba(250,247,242,0.6);
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink {
     0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
+    50% { opacity: 0; }
   }
-  .status-bar a {
-    color: var(--text-tertiary);
-    text-decoration: none;
-    transition: color var(--transition-base);
+  .status-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0;
   }
-  .status-bar a:hover { color: var(--accent); }
+  .lang-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 16px;
+    border: none;
+    border-left: 1px solid rgba(255,255,255,0.08);
+    background: transparent;
+    color: rgba(250,247,242,0.5);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    cursor: pointer;
+    transition: color 0.2s ease, background 0.2s ease;
+    letter-spacing: 0.02em;
+  }
+  .lang-toggle:hover {
+    color: var(--bg-primary);
+    background: rgba(255,255,255,0.08);
+  }
+  .lang-toggle.active {
+    color: var(--accent);
+  }
 
-  .footer-spacer { height: 80px; }
+  .footer-spacer { height: 60px; }
 
   /* Scroll reveal */
   .reveal {
