@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ji Yang — UX/UI Product Designer</title>
+<title>Ji Yang — Product Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -286,6 +286,137 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='d'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.4' numOctaves='2' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='discrete' tableValues='0 0 0 0 0 0 0 0.5 0 0 0 0 1 0 0 0'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23d)' fill='white'/%3E%3C/svg%3E");
     background-repeat: repeat;
   }
+  /* ─── Split-Flap Display ─── */
+  .flap-board {
+    perspective: 1000px;
+    margin-bottom: var(--space-lg);
+  }
+  .flap-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 6px;
+    justify-content: flex-start;
+  }
+  .flap-row.flap-row--name {
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .flap-cell {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #EDE9E0 0%, #E8E4DA 49.5%, #DDD9CF 50.5%, #E5E1D7 100%);
+    border: 1px solid #C8C4BA;
+    border-radius: 3px;
+    position: relative;
+    overflow: visible;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.35),
+                inset 0 -1px 2px rgba(0,0,0,0.06);
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: #2A2520;
+    text-shadow: 0 0 1px rgba(0,0,0,0.08);
+    text-transform: uppercase;
+  }
+  .flap-cell--name {
+    width: clamp(52px, 8vw, 88px);
+    height: clamp(68px, 11vw, 116px);
+    font-size: clamp(2.4rem, 5.5vw, 4.5rem);
+  }
+  .flap-cell--label {
+    width: clamp(22px, 3.2vw, 36px);
+    height: clamp(30px, 4.5vw, 48px);
+    font-size: clamp(0.85rem, 1.8vw, 1.35rem);
+  }
+  .flap-cell--space {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+  }
+  .flap-cell--space.flap-cell--name {
+    width: clamp(20px, 3vw, 36px);
+  }
+  .flap-cell--space.flap-cell--label {
+    width: clamp(10px, 1.5vw, 18px);
+  }
+  /* Notch / rivet details on left and right edges */
+  .flap-cell .flap-notch-l,
+  .flap-cell .flap-notch-r {
+    position: absolute;
+    top: 50%;
+    width: 3px;
+    height: 10px;
+    background: #B5B0A6;
+    border-radius: 1px;
+    transform: translateY(-50%);
+    z-index: 6;
+  }
+  .flap-cell .flap-notch-l { left: 3px; }
+  .flap-cell .flap-notch-r { right: 3px; }
+  .flap-cell--label .flap-notch-l,
+  .flap-cell--label .flap-notch-r {
+    width: 2px;
+    height: 6px;
+  }
+  .flap-cell--label .flap-notch-l { left: 2px; }
+  .flap-cell--label .flap-notch-r { right: 2px; }
+  .flap-cell--space .flap-notch-l,
+  .flap-cell--space .flap-notch-r { display: none; }
+  /* Horizontal split line (hinge) */
+  .flap-cell::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1.5px;
+    background: rgba(0,0,0,0.18);
+    box-shadow: 0 0.5px 0 rgba(255,255,255,0.15);
+    z-index: 5;
+    pointer-events: none;
+  }
+  .flap-cell--space::after { display: none; }
+  /* Worn texture + top half aged shine */
+  .flap-cell::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='4' seed='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E"),
+      linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, transparent 50%, rgba(0,0,0,0.04) 100%);
+    background-blend-mode: overlay;
+    opacity: 0.35;
+    z-index: 3;
+    pointer-events: none;
+    border-radius: 3px;
+    mix-blend-mode: multiply;
+  }
+  /* Flip animation */
+  .flap-cell .flap-char {
+    display: block;
+    transform-style: preserve-3d;
+    transition: none;
+  }
+  .flap-cell.flipping .flap-char {
+    animation: flapFlick 0.06s ease-in-out;
+  }
+  @keyframes flapFlick {
+    0%   { transform: scaleY(1); opacity: 1; }
+    40%  { transform: scaleY(0.15); opacity: 0.5; }
+    100% { transform: scaleY(1); opacity: 1; }
+  }
+  /* Landing bounce */
+  .flap-cell.landed .flap-char {
+    animation: flapLand 0.3s ease-out;
+  }
+  @keyframes flapLand {
+    0%   { transform: scaleY(0.2); opacity: 0.6; }
+    60%  { transform: scaleY(1.05); opacity: 1; }
+    80%  { transform: scaleY(0.97); }
+    100% { transform: scaleY(1); }
+  }
+
   /* ─── Hero ─── */
   .hero-label {
     font-size: 0.75rem;
@@ -301,6 +432,8 @@
     line-height: 1.02;
     letter-spacing: -0.04em;
     margin-bottom: var(--space-lg);
+    /* Hidden — replaced by flap board */
+    display: none;
   }
   .hero-intro {
     font-size: 1.3rem;
@@ -308,6 +441,13 @@
     color: var(--text-secondary);
     line-height: 1.6;
     max-width: 580px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .hero-intro.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
   .hero-intro strong {
     font-weight: 500;
@@ -606,6 +746,8 @@
     }
     .hero h1 { font-size: 2.75rem; }
     .hero-intro { font-size: 1.125rem; }
+    .flap-row.flap-row--name { gap: 5px; }
+    .flap-row { gap: 3px; }
     .project-card { padding: 20px 20px; }
     .project-card .card-arrow { display: none; }
     .contact-links { gap: var(--space-lg); }
@@ -629,10 +771,14 @@
 <!-- ═══ Hero ═══ -->
 <section class="panel hero" id="hero" data-title="" data-cmd="cat ~/ji-yang/intro">
   <div class="panel-inner">
-    <div class="hero-label reveal">UX/UI Product Designer</div>
-    <h1 class="reveal delay-1">Ji Yang</h1>
-    <p class="hero-intro reveal delay-2">
-      I design products grounded in <strong>research and reasoning</strong> — leading with the decisive insight, not the process. Based in <strong>New York &amp; Seoul</strong>.
+    <div class="flap-board" id="flapBoard">
+      <div class="flap-row flap-row--name" id="flapName"></div>
+      <div class="flap-row" id="flapLabel"></div>
+    </div>
+    <div class="hero-label" style="display:none;">Product Designer</div>
+    <h1>Ji Yang</h1>
+    <p class="hero-intro" id="heroIntro">
+      Designer exploring agentic AI, adaptive systems, and human-centered digital experiences.<br>Based in <strong>New York &amp; Seoul</strong>.
     </p>
   </div>
   <div class="scroll-hint reveal delay-4">
@@ -698,13 +844,10 @@
     <hr class="section-divider reveal delay-2">
     <div class="about-content">
       <p class="reveal delay-2">
-        I'm a UX/UI product designer who believes the strongest portfolios lead with <strong>design decisions and their trade-offs</strong> — not a linear walk through Research &rarr; Persona &rarr; Journey Map &rarr; Final Design.
+        My work centers around <strong>agentic AI</strong>, where I explore how autonomous systems are changing the way we approach research, prototyping, and designing for people. I'm particularly drawn to how this shift redefines the role of a designer from delivering fixed solutions to shaping systems that evolve with people over time.
       </p>
       <p class="reveal delay-3">
-        Every case study here follows the <em>Decisive One Page</em> structure: Problem &rarr; Hypothesis &rarr; Evidence &rarr; Design Decision with trade-offs &rarr; Outcome. If you can't find the insight in 30 seconds, the page failed.
-      </p>
-      <p class="reveal delay-4">
-        Currently exploring vibe coding, AI-assisted design tools, and the intersection of research rigor with rapid prototyping.
+        Open to collaboration across thoughtful, forward-thinking projects!
       </p>
     </div>
   </div>
@@ -756,6 +899,102 @@
 </div>
 
 <script>
+// ─── Split-Flap / Solari Board ───
+(function() {
+  const CHARSET = ' JUXYSOQYCENMPIWLBKZF93HGA2167D8VR0T.:/-&';
+  const TICK_MS = 45;
+  const ROW_DELAY = 600;
+
+  function createCell(char, sizeClass) {
+    const cell = document.createElement('div');
+    cell.className = 'flap-cell ' + sizeClass;
+    if (char === ' ') cell.classList.add('flap-cell--space');
+    const notchL = document.createElement('span');
+    notchL.className = 'flap-notch-l';
+    const notchR = document.createElement('span');
+    notchR.className = 'flap-notch-r';
+    cell.appendChild(notchL);
+    cell.appendChild(notchR);
+    const span = document.createElement('span');
+    span.className = 'flap-char';
+    span.textContent = ' ';
+    cell.appendChild(span);
+    cell.dataset.target = char.toUpperCase();
+    return cell;
+  }
+
+  function buildRow(containerId, text, sizeClass) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = '';
+    const cells = [];
+    for (let i = 0; i < text.length; i++) {
+      const cell = createCell(text[i], sizeClass);
+      container.appendChild(cell);
+      cells.push(cell);
+    }
+    return cells;
+  }
+
+  function animateRow(cells, onDone) {
+    let completed = 0;
+    cells.forEach((cell, i) => {
+      const target = cell.dataset.target;
+      if (target === ' ') { completed++; if (completed === cells.length && onDone) onDone(); return; }
+      const targetIdx = CHARSET.indexOf(target);
+      const stepsNeeded = targetIdx < 0 ? 10 : targetIdx;
+      let step = 0;
+      const charSpan = cell.querySelector('.flap-char');
+      const delay = i * 30;
+
+      setTimeout(() => {
+        const interval = setInterval(() => {
+          step++;
+          const charIdx = step % CHARSET.length;
+          charSpan.textContent = CHARSET[charIdx] === ' ' ? '\u00A0' : CHARSET[charIdx];
+          cell.classList.remove('flipping');
+          void cell.offsetWidth;
+          cell.classList.add('flipping');
+
+          if (step >= stepsNeeded) {
+            clearInterval(interval);
+            charSpan.textContent = target === ' ' ? '\u00A0' : target;
+            cell.classList.remove('flipping');
+            cell.classList.add('landed');
+            completed++;
+            if (completed === cells.length && onDone) onDone();
+          }
+        }, TICK_MS);
+      }, delay);
+    });
+  }
+
+  function runFlapAnimation() {
+    const lang = window.currentLang || 'en';
+    const name = lang === 'kr' ? '\uC591\uC9C0' : 'JI YANG';
+    const label = lang === 'kr' ? '\uD504\uB85C\uB355\uD2B8 \uB514\uC790\uC774\uB108' : 'PRODUCT DESIGNER';
+
+    const nameCells = buildRow('flapName', name, 'flap-cell--name');
+    const labelCells = buildRow('flapLabel', label, 'flap-cell--label');
+    const introEl = document.getElementById('heroIntro');
+    introEl.classList.remove('visible');
+
+    animateRow(nameCells, () => {
+      setTimeout(() => {
+        animateRow(labelCells, () => {
+          setTimeout(() => {
+            introEl.classList.add('visible');
+          }, 300);
+        });
+      }, ROW_DELAY);
+    });
+  }
+
+  window.runFlapAnimation = runFlapAnimation;
+  window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(runFlapAnimation, 400);
+  });
+})();
+
 // ─── Page controller ───
 const panels = Array.from(document.querySelectorAll('.panel'));
 const sectionHeader = document.getElementById('sectionHeader');
@@ -937,9 +1176,9 @@ document.querySelectorAll('.project-card').forEach(card => {
 // ─── Korean translation toggle ───
 const translations = {
   en: {
-    heroLabel: 'UX/UI Product Designer',
+    heroLabel: 'Product Designer',
     heroTitle: 'Ji Yang',
-    heroIntro: 'I design products grounded in <strong>research and reasoning</strong> \u2014 leading with the decisive insight, not the process. Based in <strong>New York &amp; Seoul</strong>.',
+    heroIntro: 'Designer exploring agentic AI, adaptive systems, and human-centered digital experiences.<br>Based in <strong>New York &amp; Seoul</strong>.',
     scrollHint: 'Scroll to explore',
     worksLabel: 'Selected works',
     worksTitle: 'Case Studies',
@@ -962,7 +1201,7 @@ const translations = {
     headerContact: 'Contact',
   },
   kr: {
-    heroLabel: 'UX/UI \uD504\uB85C\uB355\uD2B8 \uB514\uC790\uC774\uB108',
+    heroLabel: '\uD504\uB85C\uB355\uD2B8 \uB514\uC790\uC774\uB108',
     heroTitle: '\uC591\uC9C0',
     heroIntro: '<strong>\uB9AC\uC11C\uCE58\uC640 \uB17C\uB9AC\uC801 \uADFC\uAC70</strong>\uC5D0 \uAE30\uBC18\uD55C \uD504\uB85C\uB355\uD2B8 \uB514\uC790\uC778 \u2014 \uD504\uB85C\uC138\uC2A4\uAC00 \uC544\uB2CC \uACB0\uC815\uC801 \uC778\uC0AC\uC774\uD2B8\uB97C \uC55E\uC138\uC6C0\uB2C8\uB2E4. <strong>\uB274\uC695 &amp; \uC11C\uC6B8</strong> \uAE30\uBC18.',
     scrollHint: '\uC2A4\uD06C\uB864\uD558\uC5EC \uD0D0\uC0C9',
@@ -989,6 +1228,7 @@ const translations = {
 };
 
 let currentLang = 'en';
+window.currentLang = currentLang;
 const langBtn = document.getElementById('langToggle');
 
 langBtn.addEventListener('click', () => {
@@ -997,11 +1237,12 @@ langBtn.addEventListener('click', () => {
   langBtn.classList.toggle('active', currentLang === 'kr');
   langBtn.textContent = t.langBtn;
 
-  // Hero
-  document.querySelector('.hero-label').textContent = t.heroLabel;
+  // Hero — re-run split-flap animation
+  window.currentLang = currentLang;
   document.querySelector('.hero h1').textContent = t.heroTitle;
   document.querySelector('.hero-intro').innerHTML = t.heroIntro;
   document.querySelector('.scroll-hint').lastChild.textContent = ' ' + t.scrollHint;
+  if (window.runFlapAnimation) window.runFlapAnimation();
 
   // Works
   document.querySelector('#works .section-label').textContent = t.worksLabel;
