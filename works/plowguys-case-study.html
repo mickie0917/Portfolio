@@ -4,18 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Plowguys — Ji Yang</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg-primary: #FAF7F2;
-    --bg-secondary: #F0ECE4;
-    --text-primary: #1A1A1A;
-    --text-secondary: #6B6B6B;
-    --text-tertiary: #9B9B9B;
-    --accent: #E8735A;
-    --accent-hover: #D4624B;
-    --border: #E5E0D8;
-    --surface: #FFFFFF;
+    --bg-primary: #111111;
+    --bg-secondary: #1A1A1A;
+    --text-primary: #E8E8E8;
+    --text-secondary: #888888;
+    --text-tertiary: #555555;
+    --accent: #C0C0C0;
+    --accent-hover: #FFFFFF;
+    --border: #2A2A2A;
+    --surface: #181818;
     --font-family: 'Space Grotesk', sans-serif;
     --content-max-width: 780px;
     --edge-padding: 40px;
@@ -69,7 +69,7 @@
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
-    background: rgba(250, 247, 242, 0.9);
+    background: rgba(17, 17, 17, 0.9);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
@@ -88,10 +88,65 @@
     letter-spacing: 0.02em;
     transition: color var(--transition-base);
   }
-  nav a:hover { color: var(--accent); }
+  nav a:hover { color: var(--accent-hover); }
   .nav-logo { font-weight: 700; font-size: 1rem; letter-spacing: -0.02em; }
-  .nav-back { display: flex; align-items: center; gap: 6px; }
+  .nav-back { display: flex; align-items: center; gap: 6px; color: var(--text-secondary); }
+  .nav-back:hover { color: var(--text-primary); }
   .nav-back svg { width: 16px; height: 16px; }
+
+  /* Status bar */
+  .status-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 999;
+    display: flex;
+    align-items: stretch;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8125rem;
+    background: #0A0A0A;
+    border-top: 1px solid #222;
+    height: 40px;
+  }
+  .status-left {
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    color: #666;
+  }
+  .status-left .prompt { color: #888; }
+  .status-cursor {
+    display: inline-block;
+    width: 8px; height: 15px;
+    background: #666;
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  .status-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+  }
+  .status-back-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 100%;
+    padding: 0 16px;
+    border: none;
+    border-left: 1px solid #222;
+    background: transparent;
+    color: #555;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8125rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.2s ease, background 0.2s ease;
+  }
+  .status-back-btn:hover { color: #CCC; background: #1A1A1A; }
+  .status-back-btn svg { width: 14px; height: 14px; }
 
   .hero {
     padding: var(--space-3xl) 0 var(--space-2xl);
@@ -173,8 +228,8 @@
   section p:last-child { margin-bottom: 0; }
 
   .decisive-insight {
-    background: var(--text-primary);
-    color: var(--bg-primary);
+    background: #E8E8E8;
+    color: #111111;
     padding: var(--space-xl) 0;
     margin: var(--space-2xl) 0;
     margin-left: calc(-50vw + 50%);
@@ -185,14 +240,14 @@
     margin: 0 auto;
     padding: 0 var(--edge-padding);
   }
-  .decisive-insight .section-label { color: var(--accent); }
-  .decisive-insight p { color: rgba(250, 247, 242, 0.72); }
+  .decisive-insight .section-label { color: #555; }
+  .decisive-insight p { color: #333; }
   .decisive-insight .highlight-text {
     font-size: 1.5rem;
     font-weight: 500;
     line-height: 1.4;
     letter-spacing: -0.01em;
-    color: var(--bg-primary);
+    color: #111111;
     margin-bottom: var(--space-lg);
   }
 
@@ -427,11 +482,11 @@
 
 <nav>
   <div class="container">
-    <a href="#" class="nav-back">
+    <a href="../index.html" class="nav-back">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8L10 13"/></svg>
-      All Projects
+      Back to Home
     </a>
-    <a href="#" class="nav-logo">Ji Yang</a>
+    <a href="../index.html" class="nav-logo">Ji Yang</a>
   </div>
 </nav>
 
@@ -468,7 +523,7 @@
   <div class="inner">
     <div class="section-label fade-in">Decisive Insight</div>
     <p class="highlight-text fade-in">The app wasn't built for gloved hands in a snowstorm. Crew members needed <em>fewer decisions, larger targets, and voice-first interaction</em> — not more features.</p>
-    <p class="fade-in">Plowguys' existing crew app suffered from a classic mismatch: it was designed as a standard task management tool, but used by workers in extreme physical conditions. Crew members wearing thick insulated gloves struggled with small touch targets. Hidden menus buried critical trip information. Confusing iconography forced cognitive effort in moments that demanded speed. The problem wasn't missing functionality — it was <strong style="color: var(--bg-primary);">operational usability under constraint</strong>.</p>
+    <p class="fade-in">Plowguys' existing crew app suffered from a classic mismatch: it was designed as a standard task management tool, but used by workers in extreme physical conditions. Crew members wearing thick insulated gloves struggled with small touch targets. Hidden menus buried critical trip information. Confusing iconography forced cognitive effort in moments that demanded speed. The problem wasn't missing functionality — it was <strong style="color: #111111;">operational usability under constraint</strong>.</p>
   </div>
 </div>
 
@@ -693,12 +748,19 @@
 
 </div>
 
-<footer>
-  <div class="container">
-    <p>&copy; 2026 Ji Yang</p>
-    <a href="#" id="btt">Back to top ↑</a>
+<div style="height: 60px;"></div>
+
+<div class="status-bar">
+  <div class="status-left">
+    <span class="prompt">$</span>&nbsp;cat ~/ji-yang/works/plowguys<span class="status-cursor"></span>
   </div>
-</footer>
+  <div class="status-right">
+    <a href="../index.html" class="status-back-btn">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8L10 13"/></svg>
+      Home
+    </a>
+  </div>
+</div>
 
 <script>
 const obs = new IntersectionObserver((entries) => {
@@ -710,10 +772,6 @@ const obs = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
-document.getElementById('btt').addEventListener('click', e => {
-  e.preventDefault();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
 </script>
 
 </body>
