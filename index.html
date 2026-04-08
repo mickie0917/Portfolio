@@ -306,17 +306,17 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(180deg, #EDE9E0 0%, #E8E4DA 49.5%, #DDD9CF 50.5%, #E5E1D7 100%);
-    border: 1px solid #C8C4BA;
+    background: linear-gradient(180deg, #2A2A2A 0%, #262626 49.5%, #1E1E1E 50.5%, #232323 100%);
+    border: 1px solid #3A3A3A;
     border-radius: 3px;
     position: relative;
     overflow: visible;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.35),
-                inset 0 -1px 2px rgba(0,0,0,0.06);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06),
+                inset 0 -1px 2px rgba(0,0,0,0.2);
     font-family: var(--font-mono);
     font-weight: 600;
-    color: #2A2520;
-    text-shadow: 0 0 1px rgba(0,0,0,0.08);
+    color: #F0ECE4;
+    text-shadow: 0 0 2px rgba(255,255,255,0.1);
     text-transform: uppercase;
   }
   .flap-cell--name {
@@ -347,7 +347,7 @@
     top: 50%;
     width: 3px;
     height: 10px;
-    background: #B5B0A6;
+    background: #444;
     border-radius: 1px;
     transform: translateY(-50%);
     z-index: 6;
@@ -371,8 +371,8 @@
     right: 0;
     top: 50%;
     height: 1.5px;
-    background: rgba(0,0,0,0.18);
-    box-shadow: 0 0.5px 0 rgba(255,255,255,0.15);
+    background: rgba(0,0,0,0.4);
+    box-shadow: 0 0.5px 0 rgba(255,255,255,0.05);
     z-index: 5;
     pointer-events: none;
   }
@@ -384,13 +384,13 @@
     inset: 0;
     background:
       url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='4' seed='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E"),
-      linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, transparent 50%, rgba(0,0,0,0.04) 100%);
+      linear-gradient(to bottom, rgba(255,255,255,0.08) 0%, transparent 50%, rgba(0,0,0,0.1) 100%);
     background-blend-mode: overlay;
-    opacity: 0.35;
+    opacity: 0.15;
     z-index: 3;
     pointer-events: none;
     border-radius: 3px;
-    mix-blend-mode: multiply;
+    mix-blend-mode: screen;
   }
   /* Flip animation */
   .flap-cell .flap-char {
@@ -778,7 +778,7 @@
     <div class="hero-label" style="display:none;">Product Designer</div>
     <h1>Ji Yang</h1>
     <p class="hero-intro" id="heroIntro">
-      Designer exploring agentic AI, adaptive systems, and human-centered digital experiences.<br>Based in <strong>New York &amp; Seoul</strong>.
+      Design is not what I make — it's how I decide. I work at the intersection of agentic AI and human-centered systems, where every design choice demands clear reasoning.<br>Based in <strong>New York &amp; Seoul</strong>.
     </p>
   </div>
   <div class="scroll-hint reveal delay-4">
@@ -799,7 +799,7 @@
       <a href="works/binaural-sounds-case-study.html" class="project-card reveal-scale delay-2">
         <div class="card-number">01</div>
         <h3>Binaural Sounds</h3>
-        <p class="card-subtitle">Designing a music-based emotional tuning service grounded in 15 in-depth interviews and the KANO model. Users don't want another meditation app — they need a living soundtrack.</p>
+        <p class="card-subtitle">15 interviews revealed users already believed in binaural beats — the real bottleneck was context. I used the KANO model to decide what to build and what to cut, prioritizing contextual automation over social features.</p>
         <div class="card-meta">
           <span class="meta-tag">UX Research</span>
           <span class="meta-tag">Service Design</span>
@@ -811,7 +811,7 @@
       <a href="works/plowguys-case-study.html" class="project-card reveal-scale delay-3">
         <div class="card-number">02</div>
         <h3>Plowguys</h3>
-        <p class="card-subtitle">Redesigning a crew member app for snow removal workers — where thick gloves, harsh weather, and split-second task management demanded an interface built for the field.</p>
+        <p class="card-subtitle">A heuristic audit revealed the app wasn't built for gloved hands in a snowstorm. I traced three design moves — fewer decisions, larger targets, voice-first — from field evidence to shipped prototype.</p>
         <div class="card-meta">
           <span class="meta-tag">UX Audit</span>
           <span class="meta-tag">Heuristic Evaluation</span>
@@ -823,7 +823,7 @@
       <a href="works/makahealth-case-study.html" class="project-card reveal-scale delay-4">
         <div class="card-number">03</div>
         <h3>Makahealth</h3>
-        <p class="card-subtitle">Patients didn't need more health data — they needed a single trusted view that connected scattered records into one actionable summary. Shipped in 12 weeks.</p>
+        <p class="card-subtitle">Three signals — competitive gaps, user interviews, and stakeholder constraints — pointed to the same decision: cut the feature list and ship one unified summary view. Delivered in 12 weeks.</p>
         <div class="card-meta">
           <span class="meta-tag">B2C Patient Portal</span>
           <span class="meta-tag">UX/UI Design</span>
@@ -844,10 +844,13 @@
     <hr class="section-divider reveal delay-2">
     <div class="about-content">
       <p class="reveal delay-2">
-        My work centers around <strong>agentic AI</strong>, where I explore how autonomous systems are changing the way we approach research, prototyping, and designing for people. I'm particularly drawn to how this shift redefines the role of a designer from delivering fixed solutions to shaping systems that evolve with people over time.
+        I believe a strong design is measured by the <strong>clarity of its decisions</strong>, not the volume of its deliverables. Every project I take on follows the same discipline: define the real problem, gather evidence, make explicit trade-offs, and measure what changed.
       </p>
       <p class="reveal delay-3">
-        Open to collaboration across thoughtful, forward-thinking projects!
+        My current focus is <strong>agentic AI</strong> — exploring how autonomous systems reshape research, prototyping, and the designer's role from delivering fixed solutions to shaping systems that evolve with people over time.
+      </p>
+      <p class="reveal delay-4">
+        Open to collaboration across thoughtful, forward-thinking projects.
       </p>
     </div>
   </div>
