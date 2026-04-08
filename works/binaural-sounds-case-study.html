@@ -147,6 +147,24 @@
   }
   .status-back-btn:hover { color: #CCC; background: #1A1A1A; }
   .status-back-btn svg { width: 14px; height: 14px; }
+  .lang-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 16px;
+    border: none;
+    border-left: 1px solid #222;
+    background: transparent;
+    color: #555;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8125rem;
+    cursor: pointer;
+    transition: color 0.2s ease, background 0.2s ease;
+    letter-spacing: 0.02em;
+  }
+  .lang-toggle:hover { color: #CCC; background: #1A1A1A; }
+  .lang-toggle.active { color: #E8E8E8; }
 
   .hero {
     padding: var(--space-3xl) 0 var(--space-2xl);
@@ -714,6 +732,7 @@
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8L10 13"/></svg>
       Home
     </a>
+    <button class="lang-toggle" id="langToggle" title="Switch to Korean">EN / KR</button>
   </div>
 </div>
 
@@ -727,6 +746,17 @@ const obs = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+// Language toggle — syncs with index.html preference
+const langBtn = document.getElementById('langToggle');
+let currentLang = localStorage.getItem('portfolioLang') || 'en';
+if (currentLang === 'kr') { langBtn.classList.add('active'); langBtn.textContent = 'KR / EN'; }
+langBtn.addEventListener('click', () => {
+  currentLang = currentLang === 'en' ? 'kr' : 'en';
+  localStorage.setItem('portfolioLang', currentLang);
+  langBtn.classList.toggle('active', currentLang === 'kr');
+  langBtn.textContent = currentLang === 'en' ? 'EN / KR' : 'KR / EN';
+});
 </script>
 
 </body>
