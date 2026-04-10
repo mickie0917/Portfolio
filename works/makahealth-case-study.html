@@ -176,15 +176,14 @@
   }
   .tradeoff-item:last-child { border-bottom: none; }
 
-  /* ---- Image containers ---- */
+  /* ---- Image placeholders ---- */
   .img-full {
     width: 100%; aspect-ratio: 16 / 9; background: var(--bg-secondary); border: 1px solid var(--border);
     display: flex; align-items: center; justify-content: center;
     color: var(--text-tertiary); font-size: 0.875rem; margin: var(--space-lg) 0;
-    transition: border-color 0.4s ease; overflow: hidden;
+    transition: border-color 0.4s ease;
   }
   .img-full:hover { border-color: var(--accent); }
-  .img-full img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .img-row {
     display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md);
     margin: var(--space-lg) 0;
@@ -193,10 +192,9 @@
     aspect-ratio: 4 / 3; background: var(--bg-secondary); border: 1px solid var(--border);
     display: flex; align-items: center; justify-content: center;
     color: var(--text-tertiary); font-size: 0.8125rem;
-    transition: border-color 0.4s ease; overflow: hidden;
+    transition: border-color 0.4s ease;
   }
   .img-row .img-cell:hover { border-color: var(--accent); }
-  .img-row .img-cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
   /* Three-up image row for final designs */
   .img-triple {
@@ -207,10 +205,9 @@
     aspect-ratio: 9 / 16; background: var(--bg-secondary); border: 1px solid var(--border);
     display: flex; align-items: center; justify-content: center;
     color: var(--text-tertiary); font-size: 0.75rem;
-    transition: border-color 0.4s ease; overflow: hidden;
+    transition: border-color 0.4s ease;
   }
   .img-triple .img-cell:hover { border-color: var(--accent); }
-  .img-triple .img-cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
   /* ---- Outcome highlight ---- */
   .outcome-row {
@@ -423,7 +420,7 @@
     <p class="reveal up" style="margin-top: var(--space-lg);">
       The core design challenge wasn't any single screen — it was making five distinct product areas feel like one cohesive experience.
     </p>
-    <div class="img-full reveal up"><img src="images/makahealth/01-overview.png" alt="Five product areas — Home, Marketplace, Practitioners, Video Library, Maka Economy" loading="lazy"></div>
+    <div class="img-full reveal up">Five product areas — Home, Marketplace, Practitioners, Video Library, Maka Economy</div>
   </section>
 
   <!-- 2. Research -->
@@ -436,7 +433,7 @@
     <p class="reveal up">
       The opportunity for Maka Health was clear — but the risk was equally obvious: trying to do everything often means doing nothing well. The competitive landscape actually made me <strong>more conservative</strong> about what to ship in v1, not less.
     </p>
-    <div class="img-full reveal up"><img src="images/makahealth/02-competitive.png" alt="Competitive analysis — Noom, Headspace, Parsley Health, Hims/Hers vs Maka Health" loading="lazy"></div>
+    <div class="img-full reveal up">Competitive analysis — Noom, Headspace, Parsley Health, Hims/Hers vs Maka Health</div>
   </section>
 
   <!-- 3. User interviews & key findings -->
@@ -471,8 +468,8 @@
     </div>
 
     <div class="img-row reveal up">
-      <div class="img-cell"><img src="images/makahealth/03a-affinity.png" alt="Affinity mapping — three dominant research clusters" loading="lazy"></div>
-      <div class="img-cell"><img src="images/makahealth/03b-insights.png" alt="Key research insights — three findings that shaped design" loading="lazy"></div>
+      <div class="img-cell">Affinity mapping — three dominant research clusters</div>
+      <div class="img-cell">Key research insights — three findings that shaped design</div>
     </div>
   </section>
 
@@ -502,7 +499,7 @@
       </div>
     </div>
 
-    <div class="img-full reveal up"><img src="images/makahealth/04-home-screen.png" alt="Home screen — calendar-first layout with annotations" loading="lazy"></div>
+    <div class="img-full reveal up">Home screen — calendar-first layout with annotations</div>
   </section>
 
   <!-- 5. Design decisions — Practitioners & Economy -->
@@ -515,7 +512,7 @@
     <p class="reveal up">
       The free consultation was the business's idea, but I advocated for making it the most visually prominent element on the profile card — more prominent than the bio — because the research showed that <strong>commitment anxiety was the primary booking barrier</strong>.
     </p>
-    <div class="img-full reveal up"><img src="images/makahealth/05-practitioners.png" alt="Practitioner list and detail view with booking flow" loading="lazy"></div>
+    <div class="img-full reveal up">Practitioner list and detail view with booking flow</div>
   </section>
 
   <section class="section">
@@ -530,7 +527,7 @@
     <p class="reveal up">
       The MakaScore gauge was a deliberate choice over a simple number. In testing, participants responded more strongly to the visual gauge — which reads like a "health credit score" — than to a plain token count. The "+20 Biweekly Trend" indicator was my addition: it shows momentum, which is more motivating than a static number.
     </p>
-    <div class="img-full reveal up"><img src="images/makahealth/06-economy.png" alt="Maka Economy — MakaScore gauge, badge tier, MakaCoin wallet" loading="lazy"></div>
+    <div class="img-full reveal up">Maka Economy — MakaScore gauge, badge tier, MakaCoin wallet</div>
   </section>
 
   <!-- 6. Design progression -->
@@ -544,15 +541,15 @@
       The trade-off: five tabs is at the upper limit of what feels manageable — but the product genuinely has five distinct user needs, and hiding any behind a hamburger menu would reduce discoverability.
     </p>
     <div class="img-row reveal up">
-      <div class="img-cell"><img src="images/makahealth/07a-sketches.png" alt="Paper sketches — three layout concepts explored" loading="lazy"></div>
-      <div class="img-cell"><img src="images/makahealth/07b-navigation.png" alt="Navigation model comparison — hub-spoke, drawer, tab bar" loading="lazy"></div>
+      <div class="img-cell">Paper sketches — three layout concepts explored</div>
+      <div class="img-cell">Navigation model comparison — hub-spoke, drawer, tab bar</div>
     </div>
     <p class="reveal up">
       The biggest evolution between wireframes and final was the Marketplace. Early wireframes treated it as a flat product grid, which felt like a generic e-commerce page. The final design introduced categorization, recommendation percentages, and prominent MakaCoin pricing — transforming it from "a store" into "your personalized health toolkit." This shift came directly from research: users wanted curation, not selection.
     </p>
     <div class="img-row reveal up">
-      <div class="img-cell"><img src="images/makahealth/08a-wireframe.png" alt="Early wireframe — flat product grid, generic e-commerce" loading="lazy"></div>
-      <div class="img-cell"><img src="images/makahealth/08b-final-market.png" alt="Final marketplace — personalized recommendations with MakaCoin" loading="lazy"></div>
+      <div class="img-cell">Early wireframe — flat product grid, generic e-commerce</div>
+      <div class="img-cell">Final marketplace — personalized recommendations with MakaCoin</div>
     </div>
   </section>
 
@@ -567,8 +564,8 @@
       Maka Health wanted to position itself as premium and modern — closer to a fintech app than a clinical tool. I supported this direction because the research showed our target users associated white/clinical interfaces with "being sick." The dark background also makes the teal accent and card surfaces pop, creating clear visual hierarchy. In usability testing, no participants flagged the dark theme as unusual — several said it felt "sleek" and "different from every other health app."
     </p>
     <div class="img-row reveal right">
-      <div class="img-cell"><img src="images/makahealth/09a-colors.png" alt="Color palette — dark theme with teal, purple, and gold accents" loading="lazy"></div>
-      <div class="img-cell"><img src="images/makahealth/09b-illustrations.png" alt="Character illustrations used for wayfinding and personality" loading="lazy"></div>
+      <div class="img-cell">Color palette — dark theme with teal, purple, and gold accents</div>
+      <div class="img-cell">Character illustrations used for wayfinding and personality</div>
     </div>
   </section>
 
@@ -606,7 +603,7 @@
     <p class="reveal up" style="margin-top: var(--space-lg);">
       I presented research findings, design rationale, and usability results to the product lead and development team. The key tension: the dev team questioned whether five tabs was technically feasible for v1. The data — particularly the interview finding about users mentally separating fitness, nutrition, and consultations — persuaded the team to keep the full five-tab structure.
     </p>
-    <div class="img-full reveal up"><img src="images/makahealth/10-testing.png" alt="Usability testing results — three task flows with completion rates" loading="lazy"></div>
+    <div class="img-full reveal up">Usability testing results — three task flows with completion rates</div>
   </section>
 
   <!-- 9. What shipped -->
@@ -615,15 +612,15 @@
     <h2 class="reveal up">Five interconnected product areas</h2>
 
     <div class="img-triple stagger">
-      <div class="img-cell reveal up"><img src="images/makahealth/11a-final-home.png" alt="Final — Home calendar view" loading="lazy"></div>
-      <div class="img-cell reveal up"><img src="images/makahealth/11b-final-marketplace.png" alt="Final — Marketplace" loading="lazy"></div>
-      <div class="img-cell reveal up"><img src="images/makahealth/11c-final-practitioners.png" alt="Final — Practitioners" loading="lazy"></div>
+      <div class="img-cell reveal up">Final — Home calendar view</div>
+      <div class="img-cell reveal up">Final — Marketplace</div>
+      <div class="img-cell reveal up">Final — Practitioners</div>
     </div>
 
     <div class="img-triple stagger">
-      <div class="img-cell reveal up"><img src="images/makahealth/12a-final-videos.png" alt="Final — Video Library" loading="lazy"></div>
-      <div class="img-cell reveal up"><img src="images/makahealth/12b-final-economy.png" alt="Final — Maka Economy Wallet" loading="lazy"></div>
-      <div class="img-cell reveal up"><img src="images/makahealth/12c-final-activate.png" alt="Final — Maka Economy Activate" loading="lazy"></div>
+      <div class="img-cell reveal up">Final — Video Library</div>
+      <div class="img-cell reveal up">Final — Maka Economy Wallet</div>
+      <div class="img-cell reveal up">Final — Maka Economy Activate</div>
     </div>
 
     <p class="reveal up" style="margin-top: var(--space-lg);">
