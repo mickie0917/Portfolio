@@ -62,12 +62,6 @@
 
   /* ---- Nav ---- */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    background: rgba(17, 17, 17, 0.9);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
     padding: 0 var(--edge-padding);
     display: flex;
@@ -104,6 +98,9 @@
     font-size: 1.5rem; font-weight: 300; line-height: 1.45; color: var(--text-secondary);
     border-left: 2px solid var(--accent); padding-left: var(--space-lg);
     margin-bottom: var(--space-xl); max-width: 640px;
+  }
+  .decisive-insight strong {
+    font-weight: 600; color: var(--text-primary);
   }
 
   /* Constraint badges */
@@ -290,6 +287,24 @@
   }
   .status-back-btn:hover { color: #CCC; background: #1A1A1A; }
   .status-back-btn svg { width: 14px; height: 14px; }
+  .lang-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 16px;
+    border: none;
+    border-left: 1px solid #222;
+    background: transparent;
+    color: #555;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8125rem;
+    cursor: pointer;
+    transition: color 0.2s ease, background 0.2s ease;
+    letter-spacing: 0.02em;
+  }
+  .lang-toggle:hover { color: #CCC; background: #1A1A1A; }
+  .lang-toggle.active { color: #E8E8E8; }
 
   .footer-spacer { height: 100px; }
 
@@ -331,273 +346,324 @@
   <a href="../index.html" class="nav-logo">Ji Yang</a>
 </nav>
 
-<div class="page" style="margin-top: 56px;">
+<div class="page">
 
-  <!-- ================================================ -->
-  <!-- HERO: Lead with the decisive insight, not process -->
-  <!-- ================================================ -->
   <header class="hero">
-    <div class="hero-label reveal up">03 — Ship in Constraints</div>
-    <h1 class="reveal up">Makahealth Patient Portal</h1>
+    <div class="hero-label reveal up">03 — Case Study</div>
+    <h1 class="reveal up">Maka Health</h1>
 
-    <!-- THE DECISIVE INSIGHT — the single most important sentence on this page -->
     <div class="decisive-insight reveal up">
-      <!-- PLACEHOLDER: Replace with your actual decisive insight. What was the one key
-           decision or finding that defined this project? Example below — rewrite in your voice. -->
-      Patients didn't need more health data — they needed a single trusted view that connected scattered records into one actionable summary. We scoped down to that core and shipped it in 12 weeks.
+      People want to take control of their health — but the tools designed to help them are <strong>built for clinics, not for people</strong>.
     </div>
 
-    <!-- Constraints that made this hard -->
     <div class="constraints reveal up">
-      <span class="constraint">First Internship</span>
-      <span class="constraint">B2C Patient Portal</span>
-      <span class="constraint">Health Data Privacy</span>
-      <span class="constraint">12-Week Timeline</span>
-      <span class="constraint">Cross-functional Team</span>
+      <span class="constraint">Mobile App (iOS)</span>
+      <span class="constraint">UX Design Intern</span>
+      <span class="constraint">Health Optimization</span>
+      <span class="constraint">4-Week Timeline</span>
     </div>
 
     <div class="meta-row reveal up">
       <div class="meta-item">
-        <span class="meta-label">Role</span>
-        <span class="meta-value">UX/UI Design Intern</span>
+        <span class="meta-label">Timeline</span>
+        <span class="meta-value">4 weeks</span>
       </div>
       <div class="meta-item">
-        <span class="meta-label">Company</span>
-        <span class="meta-value">Makahealth</span>
+        <span class="meta-label">My role</span>
+        <span class="meta-value">UX Design Intern</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Methods</span>
+        <span class="meta-value">Research questionnaire, User interviews, Competitive analysis, Usability testing</span>
       </div>
       <div class="meta-item">
         <span class="meta-label">Tools</span>
-        <span class="meta-value">Figma, Miro, UsabilityHub</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">Timeline</span>
-        <!-- PLACEHOLDER: Confirm exact dates -->
-        <span class="meta-value">Summer 2023 · 12 Weeks</span>
+        <span class="meta-value">Figma, Miro</span>
       </div>
     </div>
   </header>
 
-  <!-- ================================================ -->
-  <!-- THE PROBLEM: Brief, not a literature review -->
-  <!-- ================================================ -->
+  <!-- 1. The product space -->
   <section class="section">
-    <span class="section-label reveal up">The problem</span>
-    <h2 class="reveal up">Patients couldn't see their own health story</h2>
+    <span class="section-label reveal up">The product</span>
+    <h2 class="reveal up">Five product areas, one coherent experience</h2>
     <p class="reveal up">
-      <!-- PLACEHOLDER: Rewrite in your voice with your actual problem framing -->
-      Makahealth was building a patient-facing portal to help people manage personal health data — lab results, medications, appointments, provider notes. But existing health apps treated each data type as a separate silo. Patients were expected to navigate between tabs and dashboards to piece together their own health picture.
+      Maka Health is a health optimization platform that connects users with practitioners, wellness content, and a token-based reward economy — all in one app. My job was to design the experience that makes this ecosystem feel coherent, usable, and motivating.
     </p>
     <p class="reveal up">
-      The company's initial brief asked for a comprehensive portal with feature parity to competitor apps. The question was whether building more features was the right approach — or whether patients needed something fundamentally different.
-    </p>
-    <div class="img-full reveal up">
-      <!-- PLACEHOLDER: Insert competitive landscape screenshot or problem-space visual -->
-      Competitive landscape — existing health portals
-    </div>
-  </section>
-
-  <!-- ================================================ -->
-  <!-- EVIDENCE: Converging proof, not process steps -->
-  <!-- Not "first we did research, then we did analysis" -->
-  <!-- Instead: "three sources pointed to the same finding" -->
-  <!-- ================================================ -->
-  <section class="section">
-    <span class="section-label reveal up">Evidence</span>
-    <h2 class="reveal up">Three signals pointed to the same gap</h2>
-    <p class="reveal up">
-      <!-- PLACEHOLDER: Describe how your evidence converged -->
-      Rather than walking through each research method sequentially, here's what mattered: three independent sources converged on the same finding.
+      This isn't a traditional patient portal. It's a health <strong>optimization</strong> network — and that distinction shaped every design decision. Users come here to improve, not to manage illness.
     </p>
 
     <div class="evidence-grid stagger">
       <div class="evidence-card reveal up">
-        <div class="ev-type">Competitive Analysis</div>
-        <div class="ev-title">Feature overload, no synthesis</div>
-        <div class="ev-detail">
-          <!-- PLACEHOLDER: Your actual competitive finding -->
-          Analyzed HealthTap, Healow, and 3 other patient portals. All offered raw data access (labs, meds, vitals) but none synthesized it into a unified health narrative. Patients could see individual trees but never the forest.
-        </div>
+        <div class="ev-type">Practitioners</div>
+        <div class="ev-title">Book consultations</div>
+        <div class="ev-detail">Connect with naturopathic physicians, coaches, and dietitians — both virtual and in-person.</div>
       </div>
-
       <div class="evidence-card reveal up">
-        <div class="ev-type">User Research</div>
-        <div class="ev-title">Patients wanted context, not data</div>
-        <div class="ev-detail">
-          <!-- PLACEHOLDER: Your actual research finding -->
-          Surveyed and interviewed patients about their health tracking habits. The recurring theme: "I can see my numbers, but I don't know what they mean together." They wanted their health story told to them, not handed to them in fragments.
-        </div>
+        <div class="ev-type">Routes</div>
+        <div class="ev-title">Follow health paths</div>
+        <div class="ev-detail">Personalized wellness paths like "Increase Protein Intake" or "Yoga Meditation" with actionable steps.</div>
       </div>
-
       <div class="evidence-card reveal up">
-        <div class="ev-type">Affinity Mapping</div>
-        <div class="ev-title">Synthesis over access</div>
-        <div class="ev-detail">
-          <!-- PLACEHOLDER: Your actual synthesis finding -->
-          Clustered 120+ data points from research. The dominant cluster wasn't about missing features — it was about missing connections between existing data. Users needed a connective layer, not more endpoints.
-        </div>
+        <div class="ev-type">Marketplace</div>
+        <div class="ev-title">Browse supplements &amp; services</div>
+        <div class="ev-detail">Recommended by match percentage — supplements and exclusive services personalized to each user.</div>
       </div>
-
       <div class="evidence-card reveal up">
-        <div class="ev-type">Stakeholder Input</div>
-        <div class="ev-title">Clinical team confirmed the pattern</div>
-        <div class="ev-detail">
-          <!-- PLACEHOLDER: Your actual stakeholder insight -->
-          Clinical advisors noted that patients who understood the relationship between their medications, lab results, and lifestyle changes had better adherence rates. The product opportunity was in making those relationships visible.
-        </div>
-      </div>
-    </div>
-
-    <div class="img-row reveal up">
-      <div class="img-cell">
-        <!-- PLACEHOLDER: Affinity map / synthesis screenshot from Figma -->
-        Affinity mapping
-      </div>
-      <div class="img-cell">
-        <!-- PLACEHOLDER: Research questionnaire or key findings visual -->
-        Research findings
-      </div>
-    </div>
-  </section>
-
-  <!-- ================================================ -->
-  <!-- THE DECISION: What was designed and WHY -->
-  <!-- With explicit tradeoffs -->
-  <!-- ================================================ -->
-  <section class="section">
-    <span class="section-label reveal left">The decision</span>
-    <h2 class="reveal left">One unified health summary instead of five separate dashboards</h2>
-    <p class="reveal left">
-      <!-- PLACEHOLDER: Describe the core design decision in your own words -->
-      Instead of building feature parity with competitors (separate tabs for labs, medications, appointments, vitals, and notes), we designed a single summary view that connected data points into a patient-readable health narrative. One screen, not five.
-    </p>
-    <p class="reveal left">
-      This meant cutting planned features — the recipe summarizer, detailed vitals history, and appointment scheduling were deprioritized. The core bet: a simpler product that patients actually understood would outperform a comprehensive one they bounced from.
-    </p>
-
-    <!-- Tradeoff block — the heart of the Decisive One Page -->
-    <div class="tradeoff-block reveal left">
-      <div class="tradeoff-side gained">
-        <div class="tradeoff-label">What we gained</div>
-        <!-- PLACEHOLDER: Your actual tradeoffs -->
-        <div class="tradeoff-item">Unified health summary patients could read in under 60 seconds</div>
-        <div class="tradeoff-item">Clear data relationships (labs ↔ medications ↔ lifestyle)</div>
-        <div class="tradeoff-item">Shipped within the 12-week internship window</div>
-        <div class="tradeoff-item">Reduced cognitive load for first-time users</div>
-      </div>
-      <div class="tradeoff-side sacrificed">
-        <div class="tradeoff-label">What we sacrificed</div>
-        <!-- PLACEHOLDER: Your actual tradeoffs -->
-        <div class="tradeoff-item">Recipe summarizer feature (deprioritized to v2)</div>
-        <div class="tradeoff-item">Detailed vitals history and trend charts</div>
-        <div class="tradeoff-item">In-app appointment scheduling</div>
-        <div class="tradeoff-item">Feature parity with competitor portals</div>
-      </div>
-    </div>
-
-    <div class="img-full reveal left">
-      <!-- PLACEHOLDER: Insert your key design screen from Figma — the unified summary view -->
-      Core design — unified health summary screen
-    </div>
-  </section>
-
-  <!-- ================================================ -->
-  <!-- VISUAL DESIGN: Brief, not a separate section -->
-  <!-- ================================================ -->
-  <section class="section">
-    <span class="section-label reveal right">Design language</span>
-    <h2 class="reveal right">Warm, approachable, clinically trustworthy</h2>
-    <p class="reveal right">
-      <!-- PLACEHOLDER: Brief note on visual direction -->
-      Health apps tend toward clinical blues and sterile whites. We chose a warmer palette with the Makahealth brand colors — lively greens and friendly character illustrations — to reduce the anxiety patients feel when viewing health data. The visual tone says "this is approachable" while the information hierarchy says "this is trustworthy."
-    </p>
-
-    <div class="img-row reveal right">
-      <div class="img-cell">
-        <!-- PLACEHOLDER: Color palette / style exploration from Figma -->
-        Color palette & style
-      </div>
-      <div class="img-cell">
-        <!-- PLACEHOLDER: Character/mascot design from Figma -->
-        Character illustrations
-      </div>
-    </div>
-  </section>
-
-  <!-- ================================================ -->
-  <!-- FINAL DESIGNS: Proof, not the climax -->
-  <!-- ================================================ -->
-  <section class="section">
-    <span class="section-label reveal up">Final designs</span>
-    <h2 class="reveal up">Key screens from the shipped product</h2>
-    <p class="reveal up">
-      <!-- PLACEHOLDER: Brief context about what we're looking at -->
-      These screens went through user testing and stakeholder review before shipping. The summary view tested significantly better than the multi-tab prototype for task completion and comprehension.
-    </p>
-
-    <div class="img-triple stagger">
-      <div class="img-cell reveal up">
-        <!-- PLACEHOLDER: Final screen 1 from Figma -->
-        Health summary
-      </div>
-      <div class="img-cell reveal up">
-        <!-- PLACEHOLDER: Final screen 2 from Figma -->
-        Lab results detail
-      </div>
-      <div class="img-cell reveal up">
-        <!-- PLACEHOLDER: Final screen 3 from Figma -->
-        Medication view
-      </div>
-    </div>
-
-    <div class="img-triple stagger">
-      <div class="img-cell reveal up">
-        <!-- PLACEHOLDER: Final screen 4 -->
-        Onboarding
-      </div>
-      <div class="img-cell reveal up">
-        <!-- PLACEHOLDER: Final screen 5 -->
-        Profile settings
-      </div>
-      <div class="img-cell reveal up">
-        <!-- PLACEHOLDER: Final screen 6 -->
-        Notifications
-      </div>
-    </div>
-  </section>
-
-  <!-- ================================================ -->
-  <!-- OUTCOME: Measurable, not "the client was happy" -->
-  <!-- ================================================ -->
-  <section class="section">
-    <span class="section-label reveal up">Outcome</span>
-    <h2 class="reveal up">What shipping looked like</h2>
-
-    <div class="outcome-row stagger">
-      <!-- PLACEHOLDER: Replace with your actual metrics -->
-      <div class="outcome-stat reveal up">
-        <div class="outcome-number">12wk</div>
-        <div class="outcome-desc">End-to-end from research to shipped product within internship window</div>
-      </div>
-      <div class="outcome-stat reveal up">
-        <!-- PLACEHOLDER -->
-        <div class="outcome-number">1</div>
-        <div class="outcome-desc">Unified summary view replaced 5 planned separate dashboards</div>
-      </div>
-      <div class="outcome-stat reveal up">
-        <!-- PLACEHOLDER -->
-        <div class="outcome-number">↑</div>
-        <div class="outcome-desc">User testing showed improved task completion vs. multi-tab prototype</div>
+        <div class="ev-type">Maka Economy</div>
+        <div class="ev-title">Earn through healthy behaviors</div>
+        <div class="ev-detail">Earn MakaCoin, maintain a MakaScore, and use tokens for marketplace purchases and practitioner bookings.</div>
       </div>
     </div>
 
     <p class="reveal up" style="margin-top: var(--space-lg);">
-      <!-- PLACEHOLDER: Reflection — what you learned, kept brief -->
-      This project taught me that the hardest design decision isn't what to add — it's what to cut. Scoping down to one core view felt risky during the process, but it's what made shipping possible and the product coherent. As a first internship, it also showed me how to navigate real stakeholder dynamics: the clinical team wanted comprehensive data access, the engineering team wanted feasible scope, and patients wanted simplicity. The unified summary was the design that balanced all three.
+      The core design challenge wasn't any single screen — it was making five distinct product areas feel like one cohesive experience.
+    </p>
+    <div class="img-full reveal up">Five product areas — Home, Marketplace, Practitioners, Video Library, Maka Economy</div>
+  </section>
+
+  <!-- 2. Research -->
+  <section class="section">
+    <span class="section-label reveal up">Research</span>
+    <h2 class="reveal up">Strong point solutions, but no integrated ecosystem</h2>
+    <p class="reveal up">
+      I audited five existing health and wellness platforms — Noom, Headspace, Parsley Health, Hims/Hers, and a smaller direct competitor in the functional medicine space. Most wellness apps excelled at <strong>one</strong> thing but none combined practitioner access, marketplace, content, and a reward economy in a single experience.
+    </p>
+    <p class="reveal up">
+      The opportunity for Maka Health was clear — but the risk was equally obvious: trying to do everything often means doing nothing well. The competitive landscape actually made me <strong>more conservative</strong> about what to ship in v1, not less.
+    </p>
+    <div class="img-full reveal up">Competitive analysis — Noom, Headspace, Parsley Health, Hims/Hers vs Maka Health</div>
+  </section>
+
+  <!-- 3. User interviews & key findings -->
+  <section class="section">
+    <span class="section-label reveal up">Key findings</span>
+    <h2 class="reveal up">What 40+ users and 8 in-depth interviews revealed</h2>
+    <p class="reveal up">
+      I designed a research questionnaire distributed to 40+ potential users in the target demographic — health-conscious adults aged 25–55 who were already spending on wellness but managing it all through disconnected tools and apps. From the responses, I selected 8 participants for in-depth interviews.
+    </p>
+
+    <div class="evidence-grid stagger">
+      <div class="evidence-card reveal up">
+        <div class="ev-type">Finding 01</div>
+        <div class="ev-title">Health isn't one category</div>
+        <div class="ev-detail">Users mentally separated fitness, nutrition, and medical consultations into different buckets. The app needed to feel unified without forcing everything into a single view — leading to the five-tab navigation structure.</div>
+      </div>
+      <div class="evidence-card reveal up">
+        <div class="ev-type">Finding 02</div>
+        <div class="ev-title">"I forgot it existed"</div>
+        <div class="ev-detail">Most participants had tried 2–3 wellness apps and abandoned them within a month. The #1 reason was forgetting. The calendar-first Home screen and MakaCoin reward system became retention mechanisms.</div>
+      </div>
+      <div class="evidence-card reveal up">
+        <div class="ev-type">Finding 03</div>
+        <div class="ev-title">Trust is the booking barrier</div>
+        <div class="ev-detail">Users wanted credentials, specializations, and personalized recommendations — not a random directory. This shaped practitioner cards with match percentages, experience years, and free consultation offers.</div>
+      </div>
+      <div class="evidence-card reveal up">
+        <div class="ev-type">Core insight</div>
+        <div class="ev-title">Users want a guide, not a tool</div>
+        <div class="ev-detail">They wanted something that felt like having a health-savvy friend who knows what you need, connects you with the right people, and notices when you're making progress.</div>
+      </div>
+    </div>
+
+    <div class="img-row reveal up">
+      <div class="img-cell">Affinity mapping — three dominant research clusters</div>
+      <div class="img-cell">Key research insights — three findings that shaped design</div>
+    </div>
+  </section>
+
+  <!-- 4. Design decisions — Home screen -->
+  <section class="section">
+    <span class="section-label reveal up">Decision 01</span>
+    <h2 class="reveal up">Calendar-first, not dashboard-first</h2>
+    <p class="reveal up">
+      Early wireframes tested three Home screen concepts: (A) a health dashboard with MakaScore front-and-center, (B) a content feed showing Routes and video recommendations, and (C) a calendar-first view with today's commitments. Internal testing with the team favored option A, but I pushed for option C based on the research finding that users abandon apps they "forget about."
+    </p>
+    <p class="reveal up">
+      A calendar with today's scheduled call and training session creates urgency — you have something to show up for. Dashboards are interesting to look at once; calendars create daily habits.
+    </p>
+
+    <div class="tradeoff-block reveal up">
+      <div class="tradeoff-side gained">
+        <div class="tradeoff-label">What I prioritized</div>
+        <div class="tradeoff-item">Weekly calendar showing scheduled activities — discovery calls, cardio training — as the first thing users see</div>
+        <div class="tradeoff-item">Health Routes and actionable next steps directly below the calendar</div>
+        <div class="tradeoff-item">Daily urgency and habit-forming touchpoints over passive data display</div>
+      </div>
+      <div class="tradeoff-side sacrificed">
+        <div class="tradeoff-label">What I deprioritized</div>
+        <div class="tradeoff-item">MakaCoin balance sits below the fold — visible if you scroll, not the hero element</div>
+        <div class="tradeoff-item">MakaScore lives in the Maka Economy tab, not the Home screen</div>
+        <div class="tradeoff-item">Leading with the token economy would make the app feel transactional rather than health-focused</div>
+      </div>
+    </div>
+
+    <div class="img-full reveal up">Home screen — calendar-first layout with annotations</div>
+  </section>
+
+  <!-- 5. Design decisions — Practitioners & Economy -->
+  <section class="section">
+    <span class="section-label reveal up">Decision 02</span>
+    <h2 class="reveal up">Making the consultation feel accessible</h2>
+    <p class="reveal up">
+      I structured the practitioner profile to answer the three questions users had before booking, in order of priority: "Is this person qualified?" (credentials + experience), "Can I afford it?" (MakaCoin pricing upfront), and "What if I don't like them?" (15-min free consultation as a risk reducer).
+    </p>
+    <p class="reveal up">
+      The free consultation was the business's idea, but I advocated for making it the most visually prominent element on the profile card — more prominent than the bio — because the research showed that <strong>commitment anxiety was the primary booking barrier</strong>.
+    </p>
+    <div class="img-full reveal up">Practitioner list and detail view with booking flow</div>
+  </section>
+
+  <section class="section">
+    <span class="section-label reveal up">Decision 03</span>
+    <h2 class="reveal up">Making a token system understandable</h2>
+    <p class="reveal up">
+      Token economies are abstract. Users need to understand: What is MakaCoin? How do I earn it? What can I do with it? Why should I care?
+    </p>
+    <p class="reveal up">
+      I designed the Maka Economy as three progressive layers of understanding: <strong>Wallet</strong> (what you have — MakaScore gauge, badge tier, coin balance), <strong>Activate</strong> (how to earn — checklist of qualifying actions with clear criteria), and <strong>My Voice</strong> (why it matters — community participation and governance).
+    </p>
+    <p class="reveal up">
+      The MakaScore gauge was a deliberate choice over a simple number. In testing, participants responded more strongly to the visual gauge — which reads like a "health credit score" — than to a plain token count. The "+20 Biweekly Trend" indicator was my addition: it shows momentum, which is more motivating than a static number.
+    </p>
+    <div class="img-full reveal up">Maka Economy — MakaScore gauge, badge tier, MakaCoin wallet</div>
+  </section>
+
+  <!-- 6. Design progression -->
+  <section class="section">
+    <span class="section-label reveal up">Design progression</span>
+    <h2 class="reveal up">From paper sketches to five-tab architecture</h2>
+    <p class="reveal up">
+      I explored three navigation models: (1) a hub-and-spoke with Home linking to everything, (2) a side drawer with categorized access, and (3) a persistent bottom tab bar. I chose the bottom tab bar with five tabs (Home, Marketplace, Practitioners, Video Library, Maka Economy) because it gives each product area equal weight while keeping navigation always visible.
+    </p>
+    <p class="reveal up">
+      The trade-off: five tabs is at the upper limit of what feels manageable — but the product genuinely has five distinct user needs, and hiding any behind a hamburger menu would reduce discoverability.
+    </p>
+    <div class="img-row reveal up">
+      <div class="img-cell">Paper sketches — three layout concepts explored</div>
+      <div class="img-cell">Navigation model comparison — hub-spoke, drawer, tab bar</div>
+    </div>
+    <p class="reveal up">
+      The biggest evolution between wireframes and final was the Marketplace. Early wireframes treated it as a flat product grid, which felt like a generic e-commerce page. The final design introduced categorization, recommendation percentages, and prominent MakaCoin pricing — transforming it from "a store" into "your personalized health toolkit." This shift came directly from research: users wanted curation, not selection.
+    </p>
+    <div class="img-row reveal up">
+      <div class="img-cell">Early wireframe — flat product grid, generic e-commerce</div>
+      <div class="img-cell">Final marketplace — personalized recommendations with MakaCoin</div>
+    </div>
+  </section>
+
+  <!-- 7. Visual direction -->
+  <section class="section">
+    <span class="section-label reveal right">Visual direction</span>
+    <h2 class="reveal right">Dark theme — premium, not clinical</h2>
+    <p class="reveal right">
+      The app uses a dark UI with teal/mint accent colors, warm gradient backgrounds on cards, and a clean card-based layout. This is unusual for health apps, which typically default to clinical whites and blues.
+    </p>
+    <p class="reveal right">
+      Maka Health wanted to position itself as premium and modern — closer to a fintech app than a clinical tool. I supported this direction because the research showed our target users associated white/clinical interfaces with "being sick." The dark background also makes the teal accent and card surfaces pop, creating clear visual hierarchy. In usability testing, no participants flagged the dark theme as unusual — several said it felt "sleek" and "different from every other health app."
+    </p>
+    <div class="img-row reveal right">
+      <div class="img-cell">Color palette — dark theme with teal, purple, and gold accents</div>
+      <div class="img-cell">Character illustrations used for wayfinding and personality</div>
+    </div>
+  </section>
+
+  <!-- 8. Testing -->
+  <section class="section">
+    <span class="section-label reveal up">Testing</span>
+    <h2 class="reveal up">What worked and what I changed</h2>
+    <p class="reveal up">
+      I conducted usability testing with 5 participants across the target demographic. Three core task flows were tested: find and book a practitioner consultation, start a health Route from the Home screen, and check MakaCoin balance and understand how to earn more.
+    </p>
+
+    <div class="evidence-grid stagger">
+      <div class="evidence-card reveal up">
+        <div class="ev-type">What worked</div>
+        <div class="ev-title">100% booking task completion</div>
+        <div class="ev-detail">Participants valued the match percentage and free consultation option. One said: "The free call makes me feel like they're not just trying to take my money."</div>
+      </div>
+      <div class="evidence-card reveal up">
+        <div class="ev-type">Changed</div>
+        <div class="ev-title">Maka Economy was confusing</div>
+        <div class="ev-detail">Two participants didn't understand MakaScore vs MakaCoin. I added "?" tooltip icons next to each label — small affordances that let curious users learn without cluttering the interface.</div>
+      </div>
+      <div class="evidence-card reveal up">
+        <div class="ev-type">Changed</div>
+        <div class="ev-title">Route discoverability was low</div>
+        <div class="ev-detail">Participants scrolled past Routes treating them as decoration. I increased visual weight and added clearer action language to signal these were interactive, not informational.</div>
+      </div>
+      <div class="evidence-card reveal up">
+        <div class="ev-type">Changed</div>
+        <div class="ev-title">Marketplace filters reordered</div>
+        <div class="ev-detail">Original filter chips didn't match how participants thought about supplements. Reordered by priority: Recommended first (personalized), then Specials (value), then Trending (social proof).</div>
+      </div>
+    </div>
+
+    <p class="reveal up" style="margin-top: var(--space-lg);">
+      I presented research findings, design rationale, and usability results to the product lead and development team. The key tension: the dev team questioned whether five tabs was technically feasible for v1. The data — particularly the interview finding about users mentally separating fitness, nutrition, and consultations — persuaded the team to keep the full five-tab structure.
+    </p>
+    <div class="img-full reveal up">Usability testing results — three task flows with completion rates</div>
+  </section>
+
+  <!-- 9. What shipped -->
+  <section class="section">
+    <span class="section-label reveal up">What shipped</span>
+    <h2 class="reveal up">Five interconnected product areas</h2>
+
+    <div class="img-triple stagger">
+      <div class="img-cell reveal up">Final — Home calendar view</div>
+      <div class="img-cell reveal up">Final — Marketplace</div>
+      <div class="img-cell reveal up">Final — Practitioners</div>
+    </div>
+
+    <div class="img-triple stagger">
+      <div class="img-cell reveal up">Final — Video Library</div>
+      <div class="img-cell reveal up">Final — Maka Economy Wallet</div>
+      <div class="img-cell reveal up">Final — Maka Economy Activate</div>
+    </div>
+
+    <p class="reveal up" style="margin-top: var(--space-lg);">
+      <a href="https://www.figma.com/proto/939ZSvf5JxHJZUUQ3BW7eM?node-id=0-1&t=tXMNY2E3RVqfvQ9Q-6" target="_blank" style="color: var(--accent); text-decoration: underline; transition: color var(--transition-base);">View the Figma prototype →</a>
+    </p>
+  </section>
+
+  <!-- 10. Reflection -->
+  <section class="section">
+    <span class="section-label reveal up">Reflection</span>
+    <h2 class="reveal up">What this project taught me</h2>
+
+    <div class="outcome-row stagger">
+      <div class="outcome-stat reveal up">
+        <div class="outcome-number">5</div>
+        <div class="outcome-desc">Distinct product areas designed as one cohesive ecosystem</div>
+      </div>
+      <div class="outcome-stat reveal up">
+        <div class="outcome-number">40+</div>
+        <div class="outcome-desc">Research participants across questionnaire and interviews</div>
+      </div>
+      <div class="outcome-stat reveal up">
+        <div class="outcome-number">4wk</div>
+        <div class="outcome-desc">End-to-end from research to delivered prototype</div>
+      </div>
+    </div>
+
+    <p class="reveal up" style="margin-top: var(--space-lg);">
+      <strong>Designing an ecosystem is different from designing a feature.</strong> Five product areas had to share navigation patterns, visual language, and the MakaCoin economy without any single area feeling bolted on. I learned that design systems aren't just about consistency — they're about making complexity feel simple.
+    </p>
+    <p class="reveal up">
+      <strong>Health optimization ≠ healthcare.</strong> Early in the project, I kept referencing clinical health apps for inspiration. That was wrong. Maka Health's users aren't sick — they're proactively investing in themselves. This realization shifted my entire approach to tone, visual design, and interaction patterns.
+    </p>
+    <p class="reveal up">
+      <strong>Test earlier, test cheaper.</strong> I wish I had tested paper prototypes with real users instead of saving testing for the high-fidelity stage. The Route discoverability issue and MakaScore confusion could have been caught earlier with simple sketches shown to 3 people.
+    </p>
+    <p class="reveal up">
+      <strong>Advocate with evidence.</strong> The calendar-first Home screen was not the team's initial preference — they wanted to showcase the MakaScore. Research gave me the confidence to push back respectfully. This was the first time I used data to change a team's direction, and it taught me that the designer's job isn't to have the best ideas — it's to bring the user's perspective into the room with evidence.
     </p>
   </section>
 
   <!-- Next project -->
-  <a href="#" class="next-project" style="text-decoration: none;">
+  <a href="binaural-sounds-case-study.html" class="next-project" style="text-decoration: none;">
     <div>
       <div class="next-label">Next project</div>
       <span class="next-title">Binaural Sounds</span>
@@ -617,6 +683,7 @@
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8L10 13"/></svg>
       Home
     </a>
+    <button class="lang-toggle" id="langToggle" title="Switch to Korean">EN / KR</button>
   </div>
 </div>
 
@@ -627,6 +694,17 @@
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Language toggle — syncs with index.html preference
+  const langBtn = document.getElementById('langToggle');
+  let currentLang = localStorage.getItem('portfolioLang') || 'en';
+  if (currentLang === 'kr') { langBtn.classList.add('active'); langBtn.textContent = 'KR / EN'; }
+  langBtn.addEventListener('click', () => {
+    currentLang = currentLang === 'en' ? 'kr' : 'en';
+    localStorage.setItem('portfolioLang', currentLang);
+    langBtn.classList.toggle('active', currentLang === 'kr');
+    langBtn.textContent = currentLang === 'en' ? 'EN / KR' : 'KR / EN';
+  });
 </script>
 
 </body>
